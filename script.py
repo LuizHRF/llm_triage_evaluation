@@ -2,18 +2,21 @@ import pandas as pd
 from Modules.table_processing import process_csv_table, save_results_to_csv
 from Modules.querie_exec import query_models
 from Modules.prompt_creation import merge_information, add_answering_rules
+from Modules.statistics import calculate_metrics
 import argparse
 
 # Argument parsing
 parser = argparse.ArgumentParser(description="Run the triage assessment tool.")
-parser.add_argument("--data", type=str, default="extras/test_cases.csv", help="Path to the test cases CSV file.")
+parser.add_argument("--data", type=str, default="test_cases.csv", help="Path to the test cases CSV file.")
 parser.add_argument("--model", type=str, default="Todos", help="Model to use for querying.")
 parser.add_argument("--validation", type=int, default=1, help="Validation level.")
 parser.add_argument("--verbose", type=int, default=3, help="Verbosity level.")
+parser.add_argument("--prompt", type= int, default = 0, help="Prompt to be used (ID). 0 for all prompts")
 args = parser.parse_args()
 
 data = pd.read_csv(args.data)
 info, correct_answers = process_csv_table(data, slices=(2, 6))
+
 prompts = pd.DataFrame([
     {
         "id": 1,
@@ -29,6 +32,9 @@ prompts = pd.DataFrame([
     },
 ])
 
+if (args.prompt):
+    prompts = prompts[prompts["id"] == args.prompt]
+
 test_cases_prompts = merge_information(prompts, info)
 test_cases_prompts = add_answering_rules(test_cases_prompts)
 
@@ -39,3 +45,7 @@ model_results = query_models(test_cases_prompts,
                        )
 
 save_results_to_csv(model_results, correct_answers=correct_answers)
+
+summary= calculate_metrics(model_results, correct_answers)
+print(summary)
+
