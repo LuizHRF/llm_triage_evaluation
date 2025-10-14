@@ -1,3 +1,6 @@
+
+# python .\script.py --model "gpt-oss:20b" --data "test_cases_new.csv" --validation 1 --verbose 4 --prompt 1
+
 import pandas as pd
 from Modules.table_processing import process_csv_table, save_results_to_csv
 from Modules.querie_exec import query_models
@@ -15,7 +18,7 @@ parser.add_argument("--prompt", type= int, default = 0, help="Prompt to be used 
 args = parser.parse_args()
 
 data = pd.read_csv(args.data)
-info, correct_answers = process_csv_table(data, slices=(2, 6))
+info, correct_answers = process_csv_table(data)
 
 prompts = pd.DataFrame([
     {
