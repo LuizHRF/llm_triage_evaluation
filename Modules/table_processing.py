@@ -1,4 +1,3 @@
-from networkx import display
 import pandas as pd
 from Modules.model_answer import modelAnswer
 import os

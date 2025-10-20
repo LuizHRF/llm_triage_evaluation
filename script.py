@@ -11,7 +11,7 @@ import argparse
 # Argument parsing
 parser = argparse.ArgumentParser(description="Run the triage assessment tool.")
 parser.add_argument("--data", type=str, default="test_cases.csv", help="Path to the test cases CSV file.")
-parser.add_argument("--model", type=str, default="Todos", help="Model to use for querying.")
+parser.add_argument('--models', nargs='+', type=str, default=None, help="Model to use for querying.")
 parser.add_argument("--validation", type=int, default=1, help="Validation level.")
 parser.add_argument("--verbose", type=int, default=3, help="Verbosity level.")
 parser.add_argument("--prompt", type= int, default = 0, help="Prompt to be used (ID). 0 for all prompts")
@@ -43,7 +43,7 @@ test_cases_prompts = add_answering_rules(test_cases_prompts)
 
 model_results = query_models(test_cases_prompts, 
                        validation=args.validation, 
-                       model=args.model,
+                       model=args.models,
                        verbose=args.verbose
                        )
 

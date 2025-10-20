@@ -32,14 +32,14 @@ def fix_response(response: str) -> str:
 
 def query_models(prompts: pd.DataFrame, 
                  validation: int = 1, 
-                 model: str = None, 
+                 model = None, 
                  verbose: int = 0,
                  ) -> list[modelAnswer]:
 
     if model is None or model == "Todos":
         models = get_ollama_models()
     else:
-        models = [model]
+        models = model
 
     total_queries = len(models) * (prompts.shape[1] - 1) * prompts.shape[0] * validation
     current_query = 0
