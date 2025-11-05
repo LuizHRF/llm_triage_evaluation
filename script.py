@@ -3,7 +3,7 @@
 
 import pandas as pd
 from Modules.table_processing import process_csv_table, save_results_to_csv
-from Modules.querie_exec import query_models
+from Modules.querie_exec import query_models, get_ollama_models
 from Modules.prompt_creation import merge_information, add_answering_rules
 from Modules.statistics import calculate_metrics
 import argparse
@@ -17,10 +17,7 @@ def check_params(args):
         raise ValueError("Validation level must be at least 1.")
     if args.verbose < 0 or args.verbose > 4:
         raise ValueError("Verbosity level must be between 0 and 4.")
-    available_models = []
-    for i in ollama.list():
-        for model in i[1]:
-            available_models.append(model.model)
+    available_models = get_ollama_models()
     for model in args.models:
         if model not in available_models and model != "Todos":
             raise ValueError(f"Model {model} is not available. Choose from {available_models} or 'Todos'.")
@@ -37,13 +34,6 @@ def progress_check(current_case, total_cases, messages):
         _progress_start_time
     except NameError:
         _progress_start_time = None
-
-    def _format_elapsed(sec):   
-        if sec is None:
-            return "00:00:00"
-        m, s = divmod(int(sec), 60)
-        h, m = divmod(m, 60)
-        return f"{h:02d}:{m:02d}:{s:02d}"
 
     # Close and recreate if total changed (to avoid mismatched totals)
     if _progress_bar is None or getattr(_progress_bar, "total", None) != total_cases:
@@ -85,10 +75,7 @@ args = parser.parse_args()
 check_params(args)
 
 data = pd.read_csv(args.data)
-info, correct_answers = process_csv_table(data[:3])
-
-    
-
+info, correct_answers = process_csv_table(data)
 
 print("Iniciando processamento...")
 prompts = pd.DataFrame([

@@ -38,7 +38,7 @@ def query_models(prompts: pd.DataFrame,
                  path_to_save: str = None,
                  ) -> list[modelAnswer]:
 
-    if model is None or model == "Todos":
+    if model is None or model == ["Todos"]:
         models = get_ollama_models()
     else:
         models = model
@@ -57,13 +57,13 @@ def query_models(prompts: pd.DataFrame,
     update_progress_bar()
     responses = []
 
-    for model in models:
+    for m in models:
         if path_to_save:
-            os.makedirs(f'{path_to_save}/{model}/', exist_ok=True)
+            os.makedirs(f'{path_to_save}/{m}/', exist_ok=True)
             saving_df = pd.DataFrame(columns=["ID"] + [f'{col} ({i+1}x)' for col in prompts.columns if col != 'ID' for i in range(validation)] + [f'{col} ({i+1}x) Explanation' for col in prompts.columns if col != 'ID' for i in range(validation)])
-            saving_df.to_csv(f'{path_to_save}/{model}/full_responses.csv', index=False)
+            saving_df.to_csv(f'{path_to_save}/{m}/full_responses.csv', index=False)
 
-        msg = f"Querying model: {model}"
+        msg = f"Querying model: {m}"
         if verbose > 0:
             print(msg)
         else:
@@ -93,7 +93,7 @@ def query_models(prompts: pd.DataFrame,
                 for i in range(validation):
 
                     response = ollama.chat(
-                        model=model,
+                        model=m,
                         messages=[
                             {"role": "user", "content": current_prompt}
                         ]
@@ -110,8 +110,8 @@ def query_models(prompts: pd.DataFrame,
 
                         json_response = json.loads(response)
 
-                        result = json_response.get('resposta', '')
-                        explanation = json_response.get('explicacao', '')
+                        result = str(json_response.get('resposta', ''))
+                        explanation = str(json_response.get('explicacao', ''))
                         case_answers.append({"answer": result, "explanation": explanation})
 
                     except json.JSONDecodeError:
@@ -137,21 +137,21 @@ def query_models(prompts: pd.DataFrame,
                         saving_df.loc[idx, f'{prompt} ({i+1}x)'] = result
                         saving_df.loc[idx, f'{prompt} ({i+1}x) Explanation'] = explanation
 
-                        saving_df.to_csv(f'{path_to_save}/{model}/full_responses.csv', index=False)
+                        saving_df.to_csv(f'{path_to_save}/{m}/full_responses.csv', index=False)
                             
 
                 p[prompt].update({current_id: case_answers})
 
             results.update(p)
         
-        m = modelAnswer(
-            model=model,
+        answ = modelAnswer(
+            model=m,
             validation=validation,
             prompts_used=prompts.shape[1] - 1,
             n_cases=prompts.shape[0],
             responses=results
         )
 
-        responses.append(m)
+        responses.append(answ)
 
     return responses
