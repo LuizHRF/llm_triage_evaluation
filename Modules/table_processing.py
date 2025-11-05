@@ -29,7 +29,7 @@ def process_csv_table(data: pd.DataFrame, slices: tuple = None):
 
     return information, results_df
 
-def save_results_to_csv(results: list[modelAnswer], correct_answers: pd.DataFrame = None):
+def save_results_to_csv(results: list[modelAnswer], correct_answers: pd.DataFrame = None, path: str = None):
     """
     Saves the results DataFrame to a CSV file.
 
@@ -40,9 +40,16 @@ def save_results_to_csv(results: list[modelAnswer], correct_answers: pd.DataFram
     if not results:
         raise ValueError("The results list is empty.")
     
-    day = pd.Timestamp.now().strftime("%Y-%m-%d_%H-%M")
-    log_dir = f"./logs/query_log_{day}"
-    os.makedirs(log_dir, exist_ok=True)
+    if path == None:
+    
+        day = pd.Timestamp.now().strftime("%Y-%m-%d_%H-%M")
+        log_dir = f"./logs/query_log_{day}"
+        os.makedirs(log_dir, exist_ok=True)
+    
+    else:
+        
+        log_dir = path
+        os.makedirs(log_dir, exist_ok=True)
 
     summary= calculate_metrics(results, correct_answers)
     summary.to_csv(f"{log_dir}/summary_statistics.csv", index=False)
@@ -54,9 +61,6 @@ def save_results_to_csv(results: list[modelAnswer], correct_answers: pd.DataFram
 
         folder = f"{log_dir}/{modelo}"
         os.makedirs(folder, exist_ok=True)
-
-        a = r.build_responses_df()
-        a.to_csv(f"{folder}/full_response.csv", index=False)
 
         b, _ = r.get_case_responses()
         results_mode = pd.merge(b, correct_answers, on="ID", how="left").drop(columns=["Justificativa"])
