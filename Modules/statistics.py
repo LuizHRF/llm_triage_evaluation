@@ -1,10 +1,8 @@
 import pandas as pd
 import numpy as np
-from typing import Tuple
 
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score, accuracy_score
 from Modules.model_answer import modelAnswer
-from statsmodels.stats.contingency_tables import mcnemar
 
 def calculate_metrics(model_answers: list[modelAnswer], correct_df: pd.DataFrame) -> pd.DataFrame:
 	

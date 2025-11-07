@@ -66,7 +66,9 @@ def save_results_to_csv(results: list[modelAnswer], correct_answers: pd.DataFram
             b, _ = r.get_case_responses()
             results_mode = pd.merge(b, correct_answers, on="ID", how="left").drop(columns=["Justificativa"])
             results_mode.to_csv(f"{folder}/results_summary.csv", index=False)
+
         except Exception as e:
+            
             modelo = re.sub(r'[<>":/\\|?*]', '_', r.model)
 
             folder = f"{log_dir}/{modelo}"

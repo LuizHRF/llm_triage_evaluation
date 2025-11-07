@@ -7,7 +7,6 @@ from Modules.querie_exec import query_models, get_ollama_models
 from Modules.prompt_creation import merge_information, add_answering_rules
 from Modules.statistics import calculate_metrics
 import argparse
-import ollama
 import os
 from tqdm import tqdm
 import time
@@ -68,7 +67,7 @@ parser.add_argument('--models', nargs='+', type=str, default=None, help="Model t
 parser.add_argument("--validation", type=int, default=1, help="Validation level.")
 parser.add_argument("--verbose", type=int, default=3, help="Verbosity level.")
 parser.add_argument("--prompts", nargs= '+', type= int, default = 0, help="Prompt to be used (ID). 0 for all prompts")
-parser.add_argument("--path_to_save", type=str, default=None, help="Path to save the responses.")
+parser.add_argument("--path_to_save", type=str, default='./logs', help="Path to save the responses.")
 parser.add_argument("--check-progress", action="store_true", help="Enable progress checking.")
 args = parser.parse_args()
 
@@ -81,14 +80,20 @@ print("Iniciando processamento...")
 prompts = pd.DataFrame([
     {
         "id": 1,
-        "name": "Prompt Instrucional",
-        "prompt_text": "Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.",
+        "name": "Prompt Instrucional (role)",
+        "prompt_text": "Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.\nAqui estão as informações do paciente:",
         "created_at": "2024-06-01"
     },
     {
         "id": 2,
         "name": "Prompt de tarrefa direta",
         "prompt_text": "Classifique pacientes segundo o Protocolo de Triagem de Manchester (MTS) com base nas informações fornecidas. Indique a categoria mais apropriada (Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha.",
+        "created_at": "2024-06-02"
+    },
+    {
+        "id": 3,
+        "name": "Prompt Chain-of-thought",
+        "prompt_text": "Você é um sistema inteligente de apoio a decisão clínica com expertise no Protocolo de Triagem de Manchester (MTS). Sua tarefa é classificar um paciente, seguindo um processo de raciocínio lógico em três etapas (Chain-of-Thought), antes de fornecer a classificação final. Instruções (Chain-of-Thought - CoT): 1. Análise da Queixa Principal e Sintomas: Identifique a Queixa Principal e os Sintomas e Sinais Vitais críticos fornecidos, correlacionando-os com os Discriminadores de Risco do MTS. Mencione qual Categoria de Risco Inicial (ex: Risco Imediato, Muito Urgente, Urgente) você está considerando neste ponto. 2. Determinação do Fluxograma e do Discriminador-Chave: Mencione qual Fluxograma do MTS é o mais apropriado para a queixa (ex: Dor, Problemas Respiratórios, Trauma). Em seguida, identifique o Discriminador-Chave (a pergunta ou critério que define a categoria) que leva à sua escolha. 3. Conclusão Justificada (MTS): Com base nos passos 1 e 2, defina a Categoria de Prioridade (Vermelho, Laranja, Amarelo, Verde ou Azul) e o Tempo Máximo de Atendimento recomendado. Resposta Final: Apresente os três passos de raciocínio (CoT) e, por fim, a Categoria Final. A seguir estão as informações do paciente:",
         "created_at": "2024-06-02"
     },
 ])
