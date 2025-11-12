@@ -102,7 +102,14 @@ if (args.prompts):
     prompts = prompts[prompts["id"].isin(args.prompts)]
 
 test_cases_prompts = merge_information(prompts, info)
+
+# Adicionar RAG
+
+# test_cases_prompts = add_answering_rules(prompts: pd.DataFrame)
+
 test_cases_prompts = add_answering_rules(test_cases_prompts)
+
+print(test_cases_prompts.head())
 
 verbose= args.verbose
 if args.check_progress:

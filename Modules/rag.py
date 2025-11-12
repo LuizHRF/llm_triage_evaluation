@@ -44,12 +44,25 @@ class rag_agent:
     
     """
     
-    def __init__(self, encoder_model_name='all-MiniLM-L6-v2', pdf_path: str=None):
+    def __init__(self, encoder_model_name='all-MiniLM-L6-v2', pdf_path: str=None, protocol_text: str=None):
         self.encoder = SentenceTransformer(encoder_model_name)
-        self.chunks = self._pdf_to_text_chunks(pdf_path)
-        self.index_base = self.rebuild_index_base(self.chunks)
+        if protocol_text is not None:
+            self.chunks = self.txt_to_chunks([protocol_text])
+            self.index_base = self.rebuild_index_base(self.chunks)
+        else:
+            self.chunks = self._pdf_to_text_chunks(pdf_path)
+            self.index_base = self.rebuild_index_base(self.chunks)
 
-    def _pdf_to_text_chunks(self, pdf_path, chunk_size=500):
+    def txt_to_chunks(self, texts, chunk_size=512):
+        chunks = []
+        for text in texts:
+            words = text.split()
+            for i in range(0, len(words), chunk_size):
+                chunk = " ".join(words[i:i+chunk_size])
+                chunks.append(chunk)
+        return chunks
+
+    def _pdf_to_text_chunks(self, pdf_path, chunk_size=512):
         doc = fitz.open(pdf_path)
         pages_to_remove = [0, 1, 2, 3, 4]
         for page_num in sorted(pages_to_remove, reverse=True):
@@ -79,6 +92,6 @@ class rag_agent:
     
     def improve_query(self, query: str):
         documents = self._retrieve_docs(query, 3)
-        new_query = query + "\nDocumentos Relevantes do protocolo:\n" + "\n".join(self.chunks[i] for i in documents)
+        new_query = query + "\nConsidere os seguintes trechos do protocolo como subsídio para sua decisão:\n" + "\n".join(self.chunks[i] for i in documents)
         return new_query
 
