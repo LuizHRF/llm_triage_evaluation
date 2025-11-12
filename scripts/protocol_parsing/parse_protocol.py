@@ -122,7 +122,7 @@ def create_content_images_with_pdf(encoded_images, filename):
 
     return content
 
-client = genai.Client(api_key='AIzaSyA0CWBgtb02gLL5vYJmhL4i0uZK4yI2egM')
+client = genai.Client()
 
 content = []
 content.append("A seguir vocêm tem uma série de imagens e textos. As imagens são de um protocolo de triagem de pacientes e, após cada imagem, está o texto correspondente extraído do PDF. Extraia o texto das imagens, utilizando as informações do texto do PDF para melhorar a extração. Relacione ao texto as cores que aparecem nas imagens quando for pertinente. Não utilize markdwon, responda em texto comum (títulos, subtítulos e etc.). Responda somente com o texto resultante. Identifique a troca de páginas com um traço entre duas linhas novas.")
