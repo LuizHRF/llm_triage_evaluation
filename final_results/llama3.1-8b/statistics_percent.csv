@@ -1,0 +1,5 @@
+Model,Prompt,Acurácia (moda),Precisão (moda),Recall (moda),F1 (moda),Under-triage (moda),Over-triage (moda),Concordância média,Acurácia geral,Under-triage geral,Over-triage geral
+llama3.1-8b,prompt_1,30.77%,62.36%,42.21%,36.78%,0.00%,100.00%,57.26%,29.06%,4.82%,95.18%
+llama3.1-8b,prompt_2,23.08%,42.20%,46.87%,29.84%,13.33%,86.67%,56.41%,25.64%,8.05%,91.95%
+llama3.1-8b,prompt_3,20.51%,14.40%,25.54%,13.07%,3.23%,96.77%,84.62%,21.37%,3.26%,96.74%
+llama3.1-8b,Total (Média),24.79%,39.66%,38.21%,26.57%,5.52%,94.48%,66.10%,25.36%,5.38%,94.62%

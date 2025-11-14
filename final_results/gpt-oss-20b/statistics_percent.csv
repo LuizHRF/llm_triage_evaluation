@@ -1,0 +1,5 @@
+Model,Prompt,Acurácia (moda),Precisão (moda),Recall (moda),F1 (moda),Under-triage (moda),Over-triage (moda),Concordância média,Acurácia geral,Under-triage geral,Over-triage geral
+gpt-oss-20b,prompt_1,41.03%,46.07%,42.01%,39.59%,13.64%,86.36%,58.12%,43.59%,17.74%,82.26%
+gpt-oss-20b,prompt_2,51.28%,60.31%,53.90%,52.38%,26.32%,73.68%,65.81%,46.15%,22.22%,77.78%
+gpt-oss-20b,prompt_3,46.15%,30.56%,37.35%,31.43%,15.00%,85.00%,50.43%,46.15%,13.11%,86.89%
+gpt-oss-20b,Total (Média),46.15%,45.64%,44.42%,41.13%,18.32%,81.68%,58.12%,45.30%,17.69%,82.31%

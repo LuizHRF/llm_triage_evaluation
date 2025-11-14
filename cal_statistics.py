@@ -58,7 +58,7 @@ def replace_colors(value):
         'Yellow': 3,
         'Orange': 4,
         'Red': 5
-        
+
     }
     return color_map[value]
 
@@ -154,13 +154,11 @@ def calculate_metrics(model, results, prompts_used, validation, correct_df: pd.D
         means = results[numeric_cols].mean()
         total_row = means.to_dict()
         total_row['Model'] = model
-        total_row['Prompt'] = 'Total'
+        total_row['Prompt'] = 'Total (Média)'
         results = pd.concat([results, pd.DataFrame([total_row])], ignore_index=True, sort=False)
 
     return results
 
-
-#try:
 table = pd.read_csv(f'{args.results_path}/{args.results_filename}')
 data = pd.read_csv(args.data)[["ID","Classificacao_Correta"]]
 
@@ -174,11 +172,12 @@ print(summary)
 
 summary.to_csv(f"statistics.csv", index=False)
 
-summary = summary.round(2)
-summary.to_csv(f"statistics_pretty.csv", index=False)
+summary = summary.round(4)
+# convert numeric columns to percentage strings
+numeric_cols = summary.select_dtypes(include=[np.number]).columns
+for col in numeric_cols:
+    summary[col] = summary[col].apply(lambda x: "" if pd.isna(x) else f"{x*100:.2f}%")
+summary.to_csv(f"statistics_percent.csv", index=False)
 print("Métricas calculadas e salvas com sucesso.")
-#except Exception as e:
-    #print(f"Erro ao calcular métricas: {e}")
-
 
 # uv run cal_statistics.py --data test_cases_new.csv --results_path ./ --results_filename full_responses.csv --model deepsseek --prompts-used 3 --validation 3

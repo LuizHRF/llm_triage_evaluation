@@ -1,0 +1,5 @@
+Model,Prompt,Acurácia (moda),Precisão (moda),Recall (moda),F1 (moda),Under-triage (moda),Over-triage (moda),Concordância média,Acurácia geral,Under-triage geral,Over-triage geral
+gemma3-12b,prompt_1,17.95%,8.42%,24.00%,10.69%,0.00%,100.00%,93.16%,19.66%,0.00%,100.00%
+gemma3-12b,prompt_2,33.33%,13.90%,32.00%,18.62%,0.00%,100.00%,100.00%,33.33%,0.00%,100.00%
+gemma3-12b,prompt_3,30.77%,13.33%,30.67%,17.78%,0.00%,100.00%,93.16%,31.62%,0.00%,100.00%
+gemma3-12b,Total (Média),27.35%,11.88%,28.89%,15.69%,0.00%,100.00%,95.44%,28.21%,0.00%,100.00%

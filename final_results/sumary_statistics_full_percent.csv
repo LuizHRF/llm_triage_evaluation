@@ -1,0 +1,17 @@
+﻿Model,Prompt,Acurácia (moda),Precisão (moda),Recall (moda),F1 (moda),Under-triage (moda),Over-triage (moda),Concordância média,Acurácia geral,Under-triage geral,Over-triage geral
+deepseek-r1-14b,prompt_1,35%,30%,37%,27%,12%,88%,45%,29%,18%,81%
+deepseek-r1-14b,prompt_2,43%,34%,46%,36%,36%,63%,36%,39%,33%,66%
+deepseek-r1-14b,prompt_3,28%,22%,26%,19%,17%,82%,52%,29%,18%,81%
+gemma3-12b,prompt_1,17%,8%,24%,10%,0%,100%,93%,19%,0%,100%
+gemma3-12b,prompt_2,33%,13%,32%,18%,0%,100%,100%,33%,0%,100%
+gemma3-12b,prompt_3,30%,13%,30%,17%,0%,100%,93%,31%,0%,100%
+gpt-oss-20b,prompt_1,41%,46%,42%,39%,13%,86%,58%,43%,17%,82%
+gpt-oss-20b,prompt_2,51%,60%,53%,52%,26%,73%,65%,46%,22%,77%
+gpt-oss-20b,prompt_3,46%,30%,37%,31%,15%,85%,50%,46%,13%,86%
+llama3.1-8b,prompt_1,30%,62%,42%,36%,0%,100%,57%,29%,4%,95%
+llama3.1-8b,prompt_2,23%,42%,46%,29%,13%,86%,56%,25%,8%,91%
+llama3.1-8b,prompt_3,20%,14%,25%,13%,3%,96%,84%,21%,3%,96%
+Todos (Média),prompt_1,31%,36%,36%,28%,6%,93%,63%,30%,10%,89%
+Todos (Média),prompt_2,37%,37%,44%,34%,19%,80%,64%,36%,16%,83%
+Todos (Média),prompt_3,31%,20%,30%,20%,9%,90%,70%,32%,8%,91%
+Todos (Média),Todos (Média),33%,31%,37%,27%,11%,88%,66%,32%,11%,88%
