@@ -8,16 +8,19 @@ def merge_information(prompts: pd.DataFrame,
     case_ids = test_cases_df["ID"]
     test_cases_df = test_cases_df.drop(columns=["ID"])
 
+    patient_info = ("".join([f"{col}: {row[col]}\n" for col in test_cases_df.columns if pd.notna(row[col])]) for _, row in test_cases_df.iterrows())
+    patient_info = pd.Series(patient_info)
+
     result_df = pd.DataFrame()
     for _, prompt_row in prompts.iterrows():
         prompt_text = prompt_row["prompt_text"]
         prompt_col = f"prompt_{prompt_row['id']}"
+
         result_df[prompt_col] = [
             f"{prompt_text} \n" +
-            "".join([f"{col}: {row[col]}\n" for col in test_cases_df.columns if pd.notna(row[col])])
-            for _, row in test_cases_df.iterrows()
-        ]
-    return pd.concat([case_ids, result_df], axis=1)
+            "".join(patient_info[row]) for row in range(len(patient_info))] 
+        
+    return pd.concat([case_ids, result_df], axis=1), patient_info
 
 def add_answering_rules(prompts: pd.DataFrame):
     """
@@ -42,7 +45,9 @@ Responda no formato json, com as chaves "resposta" e "explicacao"."""
 
     return prompts
 
-def add_document_references(prompts: pd.DataFrame, rag_agent_instance):
+def add_document_references(prompts: pd.DataFrame, rag_agent_instance, patient_info: pd.Series):
+    
     for col in prompts.columns[1:]:
-        prompts[col] = rag_agent_instance.improve_query(prompts[col])
+        for i in range(len(prompts)):
+            prompts.at[i, col] = rag_agent_instance.improve_query(prompts.at[i, col], patient_info[i])
     return prompts

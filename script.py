@@ -4,12 +4,13 @@
 import pandas as pd
 from Modules.table_processing import process_csv_table, save_results_to_csv
 from Modules.querie_exec import query_models, get_ollama_models
-from Modules.prompt_creation import merge_information, add_answering_rules
+from Modules.prompt_creation import add_document_references, merge_information, add_answering_rules
 from Modules.statistics import calculate_metrics
 import argparse
 import os
 from tqdm import tqdm
 import time
+from Modules.rag import rag_agent
 
 def check_params(args):
     if args.validation < 1:
@@ -69,6 +70,7 @@ parser.add_argument("--verbose", type=int, default=3, help="Verbosity level.")
 parser.add_argument("--prompts", nargs= '+', type= int, default = 0, help="Prompt to be used (ID). 0 for all prompts")
 parser.add_argument("--path_to_save", type=str, default='./logs', help="Path to save the responses.")
 parser.add_argument("--check-progress", action="store_true", help="Enable progress checking.")
+parser.add_argument("--rag", action="store_true", help="Enable RAG functionality.")
 args = parser.parse_args()
 
 check_params(args)
@@ -101,31 +103,37 @@ prompts = pd.DataFrame([
 if (args.prompts):
     prompts = prompts[prompts["id"].isin(args.prompts)]
 
-test_cases_prompts = merge_information(prompts, info)
+if args.rag:
+    try:
+        rag_agent_instance = rag_agent(protocol_text=open("protocolo_splits.txt", "r", encoding="utf-8").read())
+    except Exception as e:
+        raise RuntimeError(f"Failed to initialize RAG agent: {e}")
+
+test_cases_prompts, patient_info = merge_information(prompts, info)
 
 # Adicionar RAG
-
-# test_cases_prompts = add_answering_rules(prompts: pd.DataFrame)
+if args.rag:
+    test_cases_prompts = add_document_references(test_cases_prompts, rag_agent_instance, patient_info)
 
 test_cases_prompts = add_answering_rules(test_cases_prompts)
 
-print(test_cases_prompts.head())
+test_cases_prompts.to_csv("test_cases_prompts_final.csv", index=False)
 
-verbose= args.verbose
-if args.check_progress:
-    query_models.progress_callback = progress_check
-    verbose=0
+# verbose= args.verbose
+# if args.check_progress:
+#     query_models.progress_callback = progress_check
+#     verbose=0
 
-model_results = query_models(test_cases_prompts, 
-                       validation=args.validation, 
-                       model=args.models,
-                       verbose=verbose,
-                       path_to_save=args.path_to_save
-                       )
+# model_results = query_models(test_cases_prompts, 
+#                        validation=args.validation, 
+#                        model=args.models,
+#                        verbose=verbose,
+#                        path_to_save=args.path_to_save
+#                        )
 
-save_results_to_csv(model_results, correct_answers=correct_answers, path=args.path_to_save)
+# save_results_to_csv(model_results, correct_answers=correct_answers, path=args.path_to_save)
 
-summary= calculate_metrics(model_results, correct_answers)
-print(summary)
+# summary= calculate_metrics(model_results, correct_answers)
+# print(summary)
 
 

@@ -1,0 +1,3637 @@
+ID,prompt_1
+1,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 82
+Sexo: Feminino
+Fluxogama: Crise convulsiva/Alterações neurológicas
+Anamnese: Idosa encontrada caída em casa, sem resposta verbal adequada. Pupilas isocóricas e reativas. Apresenta hemiparesia à direita.
+Sintomas: Alteração neurológica súbita
+Temperatura (°C): 36.5
+Oximetria (%): 96
+Frequência Cardíaca (bpm): 76
+Frequência Respiratória (ipm): 20
+Pressão Sistólica (mmHg): 160
+Pressão Diastólica (mmHg): 90
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 110
+Escala de Glasgow: 11
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES DA TEMPERATURA 05-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CIANOSE DE EXTREMIDADES
+EM CRISE CONVULSIVA
+PACIENTE TORPOROSO
+PACIENTES IMUNOCOMPROMETIDOS (ONCOLÓGICOS EM RADIOTERAPIA E QUIMIOTERAPIA, TRANSPLANTADOS, DIABÉTICOS, RENAIS CRÔNICOS, HEPATOPATAS, CARDIOPATAS, EM USO DE CORTICÓIDE)
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CRIANÇA HIPOATIVA
+HISTÓRIA DE CRISE CONVULSIVA
+MENORES DE 02 ANOS
+PACIENTES IMUNOCOMPETENTES
+CRIANÇA COM SINAIS DE TOXEMIA (SONOLÊNCIA, DORES GENERALIZADAS, DIFICULDADE DE DEAMBULAR)
+PORTADORES DE PATOLOGIA CRÔNICA SEM IMUNO DEFICIÊNCIA
+EVACUAÇÕES SEMILÍQUIDAS (EM MENORES DE 01ANO)
+TEMPERATURA < 39ºC OU ≥ 38ºC APÓS SER MEDICADO HÁ MAIS DE 2h E MENOS DE 4h
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+CRIANÇA ATIVA
+VACINAÇÃO RECENTE
+TEMPERATURA ≤ 37,5ºC
+AZUL
+HISTÓRIA DE FEBRE QUE JÁ MELHOROU HÁ 24H E SEM NENHUM SINAL DOS QUADROS ANTERIORES
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+2,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 45
+Sexo: Masculino
+Fluxogama: Crise convulsiva/Alterações neurológicas
+Anamnese: Homem com antecedente de epilepsia, chegou à emergência após crise convulsiva tônico-clônica generalizada de cerca de 2 minutos. No momento, consciente, sonolento.
+Sintomas: Pós-crise convulsiva
+Temperatura (°C): 36.7
+Oximetria (%): 97
+Frequência Cardíaca (bpm): 84
+Frequência Respiratória (ipm): 18
+Pressão Sistólica (mmHg): 130
+Pressão Diastólica (mmHg): 85
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 99
+Escala de Glasgow: 13
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES DA TEMPERATURA 05-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CIANOSE DE EXTREMIDADES
+EM CRISE CONVULSIVA
+PACIENTE TORPOROSO
+PACIENTES IMUNOCOMPROMETIDOS (ONCOLÓGICOS EM RADIOTERAPIA E QUIMIOTERAPIA, TRANSPLANTADOS, DIABÉTICOS, RENAIS CRÔNICOS, HEPATOPATAS, CARDIOPATAS, EM USO DE CORTICÓIDE)
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CRIANÇA HIPOATIVA
+HISTÓRIA DE CRISE CONVULSIVA
+MENORES DE 02 ANOS
+PACIENTES IMUNOCOMPETENTES
+CRIANÇA COM SINAIS DE TOXEMIA (SONOLÊNCIA, DORES GENERALIZADAS, DIFICULDADE DE DEAMBULAR)
+PORTADORES DE PATOLOGIA CRÔNICA SEM IMUNO DEFICIÊNCIA
+EVACUAÇÕES SEMILÍQUIDAS (EM MENORES DE 01ANO)
+TEMPERATURA < 39ºC OU ≥ 38ºC APÓS SER MEDICADO HÁ MAIS DE 2h E MENOS DE 4h
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+CRIANÇA ATIVA
+VACINAÇÃO RECENTE
+TEMPERATURA ≤ 37,5ºC
+AZUL
+HISTÓRIA DE FEBRE QUE JÁ MELHOROU HÁ 24H E SEM NENHUM SINAL DOS QUADROS ANTERIORES
+
+
+Trecho 2:
+
+
+DESCRITOR: CRISE CONVULSIVA/ ALTERAÇÕES NEUROLÓGICAS 13-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ESCALA COMA DE GLASGOW (3 a 8)
+ALTERAÇÃO SÚBITA DO EQUILÍBRIO COM NÁUSEAS E VÔMITOS
+CONVULSÃO EM ATIVIDADE
+DÉFICIT AGUDO (PARESIA, PLEGIA, DISFASIA, AFASIA, PARALISIA FACIAL)
+EM PÓS COMICIAL, TORPOROSO E/OU COMATOSO
+AMARELO
+SINAIS VITAIS NORMAIS
+EPILEPSIA PRÉVIA COM CRISE NAS ÚLTIMAS 24 h
+ESTADO PÓS COMICIAL E ALERTA
+PRIMEIRO EPISÓDIO DE CRISE CONVULSIVA
+RELATO DE DESMAIO OU SÍNCOPE COM TCE
+TONTEIRA ROTATÓRIA EM REPOUSO
+VERDE
+CRISE CONVULSIVA > 12 h E ALERTA
+SINAIS VITAIS NORMAIS
+RELATO DE DESMAIO OU SÍNCOPE SEM TCE
+PARESTESIAS BILATERAIS OU MIGRATÓRIAS
+TONTURAS NÃO ROTATÓRIAS
+AZUL
+SINAIS VITAIS NORMAIS
+HISTÓRIA DE CRISE CONVULSIVA/ EPILEPSIA PRECISANDO DE RECEITA MÉDICA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+3,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 68
+Sexo: Feminino
+Fluxogama: Queixas respiratórias
+Anamnese: Paciente idosa com dispneia progressiva, fala entrecortada, início há 2h. Tem histórico de DPOC. Sem febre.
+Sintomas: Dispneia
+Temperatura (°C): 36.2
+Oximetria (%): 88
+Frequência Cardíaca (bpm): 110
+Frequência Respiratória (ipm): 30
+Pressão Sistólica (mmHg): 140
+Pressão Diastólica (mmHg): 85
+Escala de Dor: 2
+Glicemia Capilar (mg/dL): 105
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS RESPIRATÓRIAS 14-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ENCHIMENTO CAPILAR > 2s / CIANOSE DE EXTREMIDADES
+LETARGIA E/OU CONFUSÃO MENTAL
+ESTRIDOR LARÍNGEO OU DIFICULDADE PARA FALAR
+SINAIS DE CHOQUE/ DISFUNÇÃO HEMODINÂMICA
+APRESENTANDO DESCONFORTO RESPIRATÓRIO E CIANOSE POR OVACE
+AMARELO
+SPO2 ≥95%
+FR ≤28 ou ≥35 ipm
+ESFORÇO RESPIRATÓRIO MODERADO
+PRESENÇA DE SIBILÂNCIA
+EXPCTORAÇÃO ESVERDEADA OU HEMOPTISE
+PRESENÇA DE FEBRE (TAX ≥38,5º/<40,9º C)
+VERDE
+SINAIS VITAIS NORMAIS
+ESFORÇO RESPIRATÓRIO LEVE
+DOR TORÁCICA VENTILATÓRIA OU AO TOSSIR
+HISTÓRIA DE CHIEIRA NOTURNA
+TOSSE E CORIZA SEM FEBRE
+AZUL
+SINAIS VITAIS NORMAIS
+TOSSE SECA
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+4,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 29
+Sexo: Feminino
+Fluxogama: Cefaleia
+Anamnese: Paciente com cefaleia intensa há 3 dias, sem alívio com analgésicos comuns. Nega febre, vômito ou alterações visuais.
+Sintomas: Cefaleia intensa
+Temperatura (°C): 36.9
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 78
+Frequência Respiratória (ipm): 16
+Pressão Sistólica (mmHg): 120
+Pressão Diastólica (mmHg): 75
+Escala de Dor: 7
+Glicemia Capilar (mg/dL): 92
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES DE TEMPERATURA 20-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+FEBRE (T. AXILAR > 38,5º C) EM IMUNO COMPROMETIDOS
+CEFALÉIA INTENSA OU RIGIDEZ DE NUCA
+FEBRE ACOMPANHADA DE VÔMITOS EM JATO
+PRESENÇA DE CRISE CONVUSLIVA
+TEMP < 35º C EM VITIMAS DE AFOGAMENTO
+AMARELO
+ACOMPANHADA DE CEFALÉIA MODERADA (4-7/10)
+ACOMPANHADA DE SANGRAMENTO EM MUCOSAS
+CORRIMENTO GENITAL ASSOCIADO A DOR E FEBRE
+FEBRE (T. AXILAR > 38,5º C) EM IMUNOCOMPETENTES E COM TOXEMIA
+FEBRE COM DURAÇÃO MÁXIMA DE 07 DIAS
+FEBRE VESPERTINA COM RELATO DE PERDA PONDERAL
+HIPOTENSÃO POSTURAL OU LIPOTÍMIA
+PRESENÇA DE DOR ABDOMINAL INTENSA E CONTÍNUA
+PROSTRADO OU TOXEMIADO
+VERDE
+ARTRALGIA E/OU MIALGIA MODERADA (4-7/10)
+CEFALÉIA E/OU DOR RETRORBITÁRIA MODERADA (4-7/10)
+ENJÔO E/OU RELATO DE VÔMITO
+FEBRE (T. AXILAR > 38,5º C) EM IMUNOCOMPETENTES E SEM TOXEMIA
+NÃO APRESENTA SINAIS DE DESIDRATAÇÃO
+NÃO SE APRESENTA PROSTRADO OU TOXEMIADO
+PRESENÇA DE EXANTEMA COM PRURIDO
+PRESENÇA FEBRE (T > 38,5º C) HÁ MAIS DE 03 DIAS
+AZUL
+REPETIÇÃO, CONTROLE E MONITORAMENTO DE EXAMES LABORATORIAIS
+T. AXILAR < 37,5º C
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+5,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 52
+Sexo: Masculino
+Fluxogama: Queixas abdominais
+Anamnese: Dor abdominal intensa no quadrante inferior direito, com início há 4 horas. Náuseas e inapetência. Suspeita de apendicite.
+Sintomas: Dor abdominal
+Temperatura (°C): 37.8
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 102
+Frequência Respiratória (ipm): 20
+Pressão Sistólica (mmHg): 130
+Pressão Diastólica (mmHg): 80
+Escala de Dor: 8
+Glicemia Capilar (mg/dL): 96
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS ABDOMINAIS 09-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+TEMPERATURA ≥ 39ºC
+DOR INTENSA GENERALIZADA (8-10/10) QUE AUMENTA OU NÃO DE INTENSIDADE À PALPAÇÃO
+DOR INTENSA LOCALIZADA E BEM DEFINIDA (8-10/10) / QUE AUMENTA OU NÃO DE INTENSIDADE À PALPAÇÃO
+DOR ABDOMINAL INTERMITENTE TIPO CÓLICA COM VÔMITOS E FEZES SANGUINOLENTAS
+PRESENÇA DE RIGIDEZ DO ABDOME
+CRIANÇA PORTADORA DE ANEMIA FALCIFORME
+FERIMENTO COM SANGRAMENTO NÃO COMPRESSÍVEL
+SINAIS DE CHOQUE (HIPOTENSÃO, TAQUICARDIA, SUDORESE, PELE FRIA E ÚMIDA, PALIDEZ ACENTUADA)
+TRAUMA ABDOMINAL COM PERFURAÇÃO POR ARMA BRANCA OU PAF
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEL CRÍTICO (verficar Anexo-6)
+TEMPERATURA ≥ 38º C
+DOR MODERADA (4-7/10) QUE AUMENTA OU NÃO DE INTENSIDADE À PALPAÇÃO
+HISTÓRIA AGUDA DE VÔMITO COM SANGUE
+APRESENTA FEZES DE ASPECTO ENEGRECIDAS OU GROSELHA
+ABDOME DISTENDIDO COM RELATO DE ELIMINAÇÃO DE VERMINOSES
+ABDOME ASCÍTICO ACOMPANHADO DE FEBRE OU DISPNÉIA
+VÔMITOS PERSISTENTES COM SINAIS DE DESIDRATAÇÃO
+
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+DOR LEVE (1-3/10) GENERALIZADA OU LOCALIZADA
+VÔMITOS ESPARÇOS OU RELATO DE VÔMITO
+TEMPERATURA ≤ 37,5ºC
+
+AZUL
+SINAIS VITAIS NORMAIS
+DOR ABDOMINAL DE BAIXA INTENSIDADE OU DURAÇÃO MAIOR QUE 04 DIAS
+TROCA DE SNE (ROTINA)
+
+
+Trecho 2:
+
+
+DESCRITOR: EDEMA/ ICTERÍCIA/ FRAQUEZA/ CÂIMBRA 21-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA
+EDEMA GENERALIZADO (ANASARCA) ASSOCIADO À DOR E/OU DISPNEIA INTENSA
+AMARELO
+EDEMA GENERALIZADO (ANASARCA)
+EDEMA LOCALIZADO COM PRESENÇA DE SINAIS FLOGÍSTICOS
+PROSTRADO, FEBRIL OU TOXEMIADO
+PERDA PONDERAL IMPORTANTE HÁ MENOS DE 15 DIAS
+VERDE
+SINAIS VITAIS NORMAIS
+EDEMA LOCALIZADO SEM SINAIS FLOGÍSTICOS
+FRAQUEZA OU CÂIMBRAS SEM OUTROS SINTOMAS
+NÃO ESTÁ PROSTRADO OU TOXEMIADO
+AZUL
+NENHUM DOS DETERMINANTES ANTERIORES
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+6,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 40
+Sexo: Feminino
+Fluxogama: Feridas e abscessos
+Anamnese: Paciente relata ferimento cortante no antebraço esquerdo com sangramento ativo, após acidente doméstico. Orientada, sem sinais de choque.
+Sintomas: Ferimento cortante
+Temperatura (°C): 36.5
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 88
+Frequência Respiratória (ipm): 18
+Pressão Sistólica (mmHg): 122
+Pressão Diastólica (mmHg): 76
+Escala de Dor: 5
+Glicemia Capilar (mg/dL): 90
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: EDEMA/ ICTERÍCIA/ FRAQUEZA/ CÂIMBRA 21-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA
+EDEMA GENERALIZADO (ANASARCA) ASSOCIADO À DOR E/OU DISPNEIA INTENSA
+AMARELO
+EDEMA GENERALIZADO (ANASARCA)
+EDEMA LOCALIZADO COM PRESENÇA DE SINAIS FLOGÍSTICOS
+PROSTRADO, FEBRIL OU TOXEMIADO
+PERDA PONDERAL IMPORTANTE HÁ MENOS DE 15 DIAS
+VERDE
+SINAIS VITAIS NORMAIS
+EDEMA LOCALIZADO SEM SINAIS FLOGÍSTICOS
+FRAQUEZA OU CÂIMBRAS SEM OUTROS SINTOMAS
+NÃO ESTÁ PROSTRADO OU TOXEMIADO
+AZUL
+NENHUM DOS DETERMINANTES ANTERIORES
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+7,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 25
+Sexo: Masculino
+Fluxogama: Situações de crises psíquicas/abstinência de álcool e outras drogas
+Anamnese: Paciente apresenta crise de ansiedade com hiperventilação e tremores. Sem dor torácica ou história de cardiopatia.
+Sintomas: Ansiedade, hiperventilação
+Temperatura (°C): 36.7
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 95
+Frequência Respiratória (ipm): 24
+Pressão Sistólica (mmHg): 125
+Pressão Diastólica (mmHg): 80
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 98
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+SITUAÇÕES DE CRISES PSÍQUICAS / ABSTINÊNCIA DE
+DESCRITOR:
+ÁLCOOL E OUTRAS DROGAS 23-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+AGITAÇÃO PSICOMOTORA EXTREMA
+DÉFICIT NEUROLÓGICO AGUDO (CONVULSÃO, LETARGIA, COMA)
+GRAVE ALTERAÇÃO DE COMPORTAMENTO
+HIPERTONICIDADE E RIGIDEZ MUSCULAR
+INTOXICAÇÃO POR ABUSO DE SUBSTÂNCIAS PSICOATIVAS
+QUADRO DEPRESSIVO GRAVE / RISCO DE SUICÍDIO
+QUADROS DE SÍNDROMES DE ABSTINÊNCIA DO USO DE SUBSTÂNCIAS PSICOATIVAS
+RISCO IMEDIATO PARA SI OU OUTREM/ AUTO E/OU HETEROAGRESSIVIDADE
+AMARELO
+AGITAÇÃO PSICOMOTORA DE MENOR INTENSIDADE ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+ALUCINAÇÃO, DESORIENTAÇÃO ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+ESTADO DE PÂNICO
+IDEIA SUICIDA
+VERDE
+SINAIS VITAIS NORMAIS
+ANSIEDADE MODERADA
+HISTÓRIA DE TRANSTORNO MENTAL
+HUMOR DEPRIMIDO
+INQUIETAÇÃO, MAS NÃO AGITADO
+SEM MANIFESTAÇÃO APARENTE DE RISCO PARA SI OU OUTREM
+AZUL
+SINAIS VITAIS NORMAIS
+ANSIEDADE LEVE
+CRISE OU PROBLEMAS SOCIAIS
+DEPRESSÃO CRÔNICA OU RECORRENTE
+HISTÓRICO DE DISTÚRBIO PSIQUIÁTRICO PRECISANDO DE RECEITA MÉDICA
+INSÔNIA OU IMPULSIVIDADE
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+8,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 60
+Sexo: Feminino
+Fluxogama: Alterações glicêmicas
+Anamnese: Paciente com histórico de diabetes, relata tontura, sudorese e fraqueza. Glicemia capilar muito baixa.
+Sintomas: Hipoglicemia
+Temperatura (°C): 36.4
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 88
+Frequência Respiratória (ipm): 18
+Pressão Sistólica (mmHg): 110
+Pressão Diastólica (mmHg): 70
+Escala de Dor: 1
+Glicemia Capilar (mg/dL): 42
+Escala de Glasgow: 14
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES GLICÊMICAS 16-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+GLICEMIA CAPILAR < 50 (LO) OU > 500 mg/dL (HI)
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA (LETARGIA, AGITAÇÃO, CONFUSÃO, COMA)
+DISPNÉIA (RÁPIDA E PROFUNDA)
+SUDORESE PROFUSA ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+AMARELO
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 320 ou < 50 mg/dL
+SINAIS DE DESIDRATAÇÃO LEVE/MODERADA
+SPO2 ENTRE 93 e 95%
+VERDE
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 250 mg/dL ASSINTOMÁTICO
+AZUL
+GLICEMIA CAPILAR < 250 mg/dl ASSINTOMÁTICO
+HISTÓRIA DE DIABETES PRECISANDO DE RECEITA MÉDICA E/OU SOLICITAÇÃO DE EXAMES
+
+
+Trecho 2:
+
+
+DESCRITOR: SANGRAMENTOS 09-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA
+COMPROMETIMENTO DAS VIAS AEREAS
+EPISTAXE FRANCA ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+HEMATÊMESE VOLUMOSA/HEMOPTISE FRANCA
+MELENA / HEMATOQUEZIA COM INSTABILIDADE HEMODINÂMICA
+AMARELO
+EPISTAXE COM PA < 180/110 mmHg USUÁRIO DE ANTICOAGULANTE
+HEMATÊMESE/MELENA COM SSNV NORMAIS
+HEMATOQUEZIA OU HEMOPTISE COM SSNV NORMAIS
+PORTADOR DE CIRROSE HEPÁTICA OU COAGULOPATIA
+PORTADOR DE DIABETES E/OU FAZ USO DE ANTICOAGULANTE
+SANGRAMENTO DE MUCOSAS (GENGIVAS, LÁBIOS)
+SANGRAMENTO HEMORROIDÁRIO COM DOR INTENSA (8-10/10)
+VERDE
+SINAIS VITAIS NORMAIS
+RELATO DE HEMATÊMESE, HEMATOQUESIA
+RELATO DE HEMOPTISE LEVE (RAIAS DE SANGUE)
+RELATO DE MELENA (NORMAL NO MOMENTO)
+SANGRAMENTO HEMORROIDÁRIO DISCRETO E DOR LEVE/MODERADA (1-7/10)
+AZUL
+ATRASO MENSTRUAL SEM OUTROS SINTOMAS
+NENHUM DOS DETERMINANTES ANTERIORES
+RELATO DE EPISTAXE
+RELATO DE SANGRAMENTO HEMORROIDÁRIO
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+9,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 34
+Sexo: Masculino
+Fluxogama: Queixas abdominais
+Anamnese: Paciente com vômitos há 8 horas e sinais de desidratação leve. Aceita líquidos. Sem dor abdominal intensa.
+Sintomas: Vômito
+Temperatura (°C): 37.0
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 92
+Frequência Respiratória (ipm): 17
+Pressão Sistólica (mmHg): 118
+Pressão Diastólica (mmHg): 76
+Escala de Dor: 2
+Glicemia Capilar (mg/dL): 95
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: DOR DE CABEÇA 15-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ENCHIMENTO CAPILAR > 2s
+ACOMPANHADA DE RIGIDEZ DE NUCA, NÁUSEAS E VÔMITOS
+DOR INTENSA (8-10/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+ACOMPANHADA DE DOR TORÁCICA
+ACOMPANHADA DE ALTERAÇÕES VISUAIS
+INTENSA, SÚBITA OU RAPIDAMENTE PROGRESSIVA
+ASSOCIADA A DÉFICIT NEUROLÓGICOS (PARESIA, PARESTESIA, DISFASIA, AFASIA, ATAXIA)
+AMARELO
+SINAIS VITAIS NORMAIS
+DOR EM REGIÃO TEMPORAL
+DOR RETRORBITÁRIA
+DOR MODERADA (4-7/10) ACOMPANHADA NÁUSEAS E VÔMITOS OU STATUS ENXAQUECOSO DE DOR COM DURAÇÃO ≥ 72 h
+VERDE
+SINAIS VITAIS NORMAIS
+DOR FACIAL COM RINORRÉIA PURULENTA
+DOR LEVE (1-3/10) / CEFALEIA DE ESFORÇO
+RELATO DE FEBRE E/OU VÔMITOS
+AZUL
+DOR CRÔNICA OU RECORRENTE SEM PIORA RECENTE
+NENHUM DOS DETERMINANTES ANTERIORES
+
+
+Trecho 2:
+
+
+DESCRITOR: ALTERAÇÕES DE TEMPERATURA 20-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+FEBRE (T. AXILAR > 38,5º C) EM IMUNO COMPROMETIDOS
+CEFALÉIA INTENSA OU RIGIDEZ DE NUCA
+FEBRE ACOMPANHADA DE VÔMITOS EM JATO
+PRESENÇA DE CRISE CONVUSLIVA
+TEMP < 35º C EM VITIMAS DE AFOGAMENTO
+AMARELO
+ACOMPANHADA DE CEFALÉIA MODERADA (4-7/10)
+ACOMPANHADA DE SANGRAMENTO EM MUCOSAS
+CORRIMENTO GENITAL ASSOCIADO A DOR E FEBRE
+FEBRE (T. AXILAR > 38,5º C) EM IMUNOCOMPETENTES E COM TOXEMIA
+FEBRE COM DURAÇÃO MÁXIMA DE 07 DIAS
+FEBRE VESPERTINA COM RELATO DE PERDA PONDERAL
+HIPOTENSÃO POSTURAL OU LIPOTÍMIA
+PRESENÇA DE DOR ABDOMINAL INTENSA E CONTÍNUA
+PROSTRADO OU TOXEMIADO
+VERDE
+ARTRALGIA E/OU MIALGIA MODERADA (4-7/10)
+CEFALÉIA E/OU DOR RETRORBITÁRIA MODERADA (4-7/10)
+ENJÔO E/OU RELATO DE VÔMITO
+FEBRE (T. AXILAR > 38,5º C) EM IMUNOCOMPETENTES E SEM TOXEMIA
+NÃO APRESENTA SINAIS DE DESIDRATAÇÃO
+NÃO SE APRESENTA PROSTRADO OU TOXEMIADO
+PRESENÇA DE EXANTEMA COM PRURIDO
+PRESENÇA FEBRE (T > 38,5º C) HÁ MAIS DE 03 DIAS
+AZUL
+REPETIÇÃO, CONTROLE E MONITORAMENTO DE EXAMES LABORATORIAIS
+T. AXILAR < 37,5º C
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+10,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 50
+Sexo: Feminino
+Fluxogama: Dor cervical/Dorsal/Lombar ou extremidades
+Anamnese: Paciente com dor lombar após esforço físico. Sem irradiação, sem alterações sensitivas ou motoras.
+Sintomas: Dor lombar
+Temperatura (°C): 36.8
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 85
+Frequência Respiratória (ipm): 18
+Pressão Sistólica (mmHg): 125
+Pressão Diastólica (mmHg): 82
+Escala de Dor: 6
+Glicemia Capilar (mg/dL): 100
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: DOR CERVICAL/ DORSAL/ LOMBAR OU EXTREMIDADES 11-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+DOR INTENSA (8-10/10) AGUDA COM SINAIS DE ISQUEMIA OU ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+PACIENTE PORTADOR DE FALCEMIA EM CRISE ÁLGICA
+AMARELO
+DOR MODERADA (4-7/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+FEBRE E PRESENÇA DE SINAIS FLOGÍSTICOS LOCAIS
+DOR EM MMII PERSISTENTE COM EDEMA E RIGIDEZ EM PANTURRILHA
+LIMITAÇÃO IMPORTANTE DOS MOVIMENTOS/FUNÇÃO
+LOMBALGIA QUE IMPEDE DEAMBULAÇÃO OU IRRADIA PARA MMII
+VERDE
+SINAIS VITAIS NORMAIS
+ATRALGIA COM LIMITAÇÕES SEM SINAIS FLOGÍSTICOS
+LIMITAÇÃO LEVE DOS MOVIMENTOS/ SEM PERDA DE FUNÇÃO
+DOR LEVE (1-3/10)
+AZUL
+SINAIS VITAIS NORMAIS
+DOR CRÔNICA OU RECORRENTE
+LOMBALGIA CRÔNICA NÃO TRAUMÁtica
+NENHUM DOS DETERMINANTES ANTERIORES
+SEM EDEMA OU SINAIS FLOGÍSTICOS LOCAIS
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+11,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 72
+Sexo: Masculino
+Fluxogama: Queixas oculares
+Anamnese: Paciente relata escurecimento visual súbito no olho direito. Sem dor. Hipertenso, em uso de medicação.
+Sintomas: Alteração visual súbita
+Temperatura (°C): 36.6
+Oximetria (%): 97
+Frequência Cardíaca (bpm): 82
+Frequência Respiratória (ipm): 18
+Pressão Sistólica (mmHg): 145
+Pressão Diastólica (mmHg): 90
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 102
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS OCULARES 18-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+CONTATO DIRETO COM SUBSTÂNCIA QUÍMICA
+DOR INTENSA (8-10/10) E PRESENÇA DE SINTOMAS
+EXTRAÇÃO TRAUMÁTICA/ OBJETO CRAVADO
+PERDA VISUAL OU DIPLOPIA SÚBITA
+AMARELO
+DOR MODERADA (4-7/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+CELULITE PERIORBITÁRIA
+OLHO AVERMELHADO APÓS CONTATO COM SUBSTÂNCIAS QUÍMICAS E/ OU TRAUMA
+VERDE
+DOR LEVE (1-3/10)
+OLHO AVERMELHADO SEM HISTÓRIA DE TRAUMA OU CONTATO COM SUBSTÂNCIAS QUÍMICAS
+PRESENÇA DE SECREÇÃO PURULENTA
+PRURIDO OCULAR
+AZUL
+MANCHAS HEMORRÁGICAS SEM HISTÓRIA DE TRAUMA
+TERÇOL SEM CELULITE
+
+
+Trecho 2:
+
+
+Quadro 1- Escala de Coma de Glasgow (ECG)
+VARIÁVEIS ESCORE
+ABERTURA OCULAR
+Espontânea 4
+Ordem Verbal 3
+Estímulo doloroso 2
+Nenhum 1
+RESPOSTA VERBAL
+Orientado 5
+Confuso 4
+Palavras inapropriadas 3
+Palavras incompreensíveis 2
+Nenhuma 1
+RESPOSTA MOTORA
+Obedece comandos 6
+Localiza a dor 5
+Movimento de retirada 4
+Flexão anormal 3
+Extensão anormal 2
+Nenhuma 1
+
+Pontuação Máxima: 15
+Pontuação Mínima: 03
+Quadro Neurológico grave: de 03 a 08
+Quadro Neurológico moderado: 09 a 13
+Quadro Neurológico aceitável: 14 a 15
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+12,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 38
+Sexo: Feminino
+Fluxogama: Sangramentos
+Anamnese: Paciente gestante de 34 semanas com sangramento vaginal moderado. Sem dor intensa, mas preocupada.
+Sintomas: Sangramento vaginal na gestação
+Temperatura (°C): 36.9
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 90
+Frequência Respiratória (ipm): 18
+Pressão Sistólica (mmHg): 118
+Pressão Diastólica (mmHg): 75
+Escala de Dor: 3
+Glicemia Capilar (mg/dL): 97
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: DOR CERVICAL/ DORSAL/ LOMBAR OU EXTREMIDADES 11-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+DOR INTENSA (8-10/10) AGUDA COM SINAIS DE ISQUEMIA OU ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+PACIENTE PORTADOR DE FALCEMIA EM CRISE ÁLGICA
+AMARELO
+DOR MODERADA (4-7/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+FEBRE E PRESENÇA DE SINAIS FLOGÍSTICOS LOCAIS
+DOR EM MMII PERSISTENTE COM EDEMA E RIGIDEZ EM PANTURRILHA
+LIMITAÇÃO IMPORTANTE DOS MOVIMENTOS/FUNÇÃO
+LOMBALGIA QUE IMPEDE DEAMBULAÇÃO OU IRRADIA PARA MMII
+VERDE
+SINAIS VITAIS NORMAIS
+ATRALGIA COM LIMITAÇÕES SEM SINAIS FLOGÍSTICOS
+LIMITAÇÃO LEVE DOS MOVIMENTOS/ SEM PERDA DE FUNÇÃO
+DOR LEVE (1-3/10)
+AZUL
+SINAIS VITAIS NORMAIS
+DOR CRÔNICA OU RECORRENTE
+LOMBALGIA CRÔNICA NÃO TRAUMÁtica
+NENHUM DOS DETERMINANTES ANTERIORES
+SEM EDEMA OU SINAIS FLOGÍSTICOS LOCAIS
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+13,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 19
+Sexo: Masculino
+Fluxogama: Parada Cardiorrespiratória
+Anamnese: Paciente jovem vítima de afogamento. Ressuscitação cardiopulmonar em andamento há 5 minutos. Chega à emergência sem sinais vitais detectáveis.
+Sintomas: Apneia; Bradicardia extrema
+Temperatura (°C): 35.0
+Oximetria (%): 70
+Frequência Cardíaca (bpm): 40
+Frequência Respiratória (ipm): 6
+Pressão Sistólica (mmHg): 60
+Pressão Diastólica (mmHg): 40
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 80
+Escala de Glasgow: 3
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+PULSO/ FREQUÊNCIA CARDÍACA
+NORMAL De 60 a 80 Bpm
+TAQUICARDIA ≥ de 100 bpm
+BRADICARDIA ≤ de 60 bpm.
+
+
+Trecho 2:
+
+
+DESCRITOR: DOR TORÁCICA 08-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+DOR INTENSA EM PESO, OPRESSÃO, QUEIMAÇÃO, DESCONFORTO/ ANSIEDADE
+IRRADIA: PESCOÇO, OMBROS, MANDÍBULA, BRAÇO, DORSO OU EPIGÁSTRIO
+NAUSEAS / VÔMITOS/ DISPNÉIA / SUDORESE FRIA / PALIDEZ
+AMARELO
+SINAIS VITAIS NORMAIS
+DOR MODERADA (3-7/10) QUE PIORA COM RESPIRAÇÃO PROFUNDA / TOSSE / DISPNEIA / PALPAÇÃO
+CARDIOPATIA PRÉVIA E/OU DIABETES E/OU HIPERTENSÃO
+VERDE
+SINAIS VITAIS NORMAIS
+DOR À PALPAÇÃO DE CARACTERÍSTICA MUSCULAR
+DOR AGUDA LEVE SEM HISTÓRIA DE CARDIOPATIA
+AZUL
+SINAIS VITAIS NORMAIS
+DOR TORÁCICA HÁ MAIS DE 07 DIAS
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+14,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 35
+Sexo: Feminino
+Fluxogama: Queimaduras
+Anamnese: Paciente vítima de incêndio em residência. Queimaduras de 2º grau em aproximadamente 25% da superfície corporal (tórax e membros superiores).
+Sintomas: Dor intensa; Eritema; Bolhas
+Temperatura (°C): 37.1
+Oximetria (%): 95
+Frequência Cardíaca (bpm): 105
+Frequência Respiratória (ipm): 22
+Pressão Sistólica (mmHg): 125
+Pressão Diastólica (mmHg): 80
+Escala de Dor: 9
+Glicemia Capilar (mg/dL): 110
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+Trecho 2:
+
+
+DESCRITOR: PRESSÃO ALTA 17-A
+VERMELHO
+PAS > 220 ou PAD > 130 mmHg COM QUALQUER SINTOMA
+ALTERAÇÕES VISUAIS (VISÃO TURVA E/OU ESCOTOMAS)
+DOR TORÁCICA CARACTERÍSTICA DE ISQUEMIA
+EPISTAXE FRANCA ASSOCIADA A PAS > 220 ou PAD > 130 mmHg
+NÍVEL DE CONSCIÊNCIA ALTERADO (HIPOATIVO/AGITADO)
+SINTOMAS NEUROLÓGICOS (PARESIA, PLEGIA, AFASIA, DISFASIA, ATAXIA)
+AMARELO
+PAS >220 ou PAD>130 mmHg SEM SINTOMAS
+PAS ENTRE 190-220 ou PAD ENTRE 120-130 mmHg COM QUALQUER SINTOMA
+VERDE
+PAS ENTRE 190-220 mmHg SEM SINTOMAS
+PAD ENTRE 110-130 mmHg SEM SINTOMAS
+AZUL
+PAS < 180 E PAD < 110 mmHg ASSINTOMÁTICO
+HISTÓRIA DE HAS PRECISANDO DE RECEITA MÉDICA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+15,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 28
+Sexo: Masculino
+Fluxogama: Trauma de crânico
+Anamnese: Paciente vítima de acidente de moto sem capacete. Perda de consciência inicial breve. Queixa de cefaleia intensa e náuseas. Escala de Glasgow 14.
+Sintomas: Cefaleia; Náusea; Confusão mental
+Temperatura (°C): 36.8
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 92
+Frequência Respiratória (ipm): 20
+Pressão Sistólica (mmHg): 135
+Pressão Diastólica (mmHg): 85
+Escala de Dor: 8
+Glicemia Capilar (mg/dL): 105
+Escala de Glasgow: 14
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: TRAUMA DE CRÂNIO 03-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+CEFALÉIA OU CERVICALGIA INTENSA (8-10/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+FERIMENTO PERFURANTE/ AFUNDAMENTO DE CRÂNIO/ EXPOSIÇÃO DE MASSA ENCEFÁLICA OU LÍQUOR CÉFALORRAQUIDIANO
+INCONSCIENTE/ GLASGOW (8/9-12)
+AGITAÇÃO PSICOMOTORA
+APRESENTANDO NÁUSEAS /VÔMITOS
+OTORRAGIA / RINORRÉIA/RRAGIA OU HEMATOMA PERIORBITAL
+FRATURA DE CRÂNIO COM PERDA DE LÍQUOR/ SANGUE OU MASSA ENCEFÁLICA
+HEMATOMA RETROAURICULAR (SINAL DE BATLLE)
+PRESENÇA DE CRISE CONVULSIVA
+AMARELO
+CEFALÉIA MODERADA SEM CERVICALGIA (4-7/10)
+FERIMENTO COM HEMORRAGIA CONTROLÁVEL
+HISTÓRIA DE INCONSCIÊNCIA
+NÍVEL DE CONSCIÊNCIA PRESERVADO - GLASGOW (14-15)
+VERDE
+SINAIS VITAIS NORMAIS
+NÍVEL DE CONSCIÊNCIA PRESERVADO-GLASGOW (15)
+CEFALÉIA LEVE (1-3/10)
+CONTUSÕES E ESCORIAÇÕES
+OCORRÊNCIA HÁ MAIS DE 06 h
+TRAUMA DE BAIXO IMPACTO
+
+
+Trecho 2:
+
+
+DESCRITOR: CRISE CONVULSIVA/ ALTERAÇÕES NEUROLÓGICAS 13-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ESCALA COMA DE GLASGOW (3 a 8)
+ALTERAÇÃO SÚBITA DO EQUILÍBRIO COM NÁUSEAS E VÔMITOS
+CONVULSÃO EM ATIVIDADE
+DÉFICIT AGUDO (PARESIA, PLEGIA, DISFASIA, AFASIA, PARALISIA FACIAL)
+EM PÓS COMICIAL, TORPOROSO E/OU COMATOSO
+AMARELO
+SINAIS VITAIS NORMAIS
+EPILEPSIA PRÉVIA COM CRISE NAS ÚLTIMAS 24 h
+ESTADO PÓS COMICIAL E ALERTA
+PRIMEIRO EPISÓDIO DE CRISE CONVULSIVA
+RELATO DE DESMAIO OU SÍNCOPE COM TCE
+TONTEIRA ROTATÓRIA EM REPOUSO
+VERDE
+CRISE CONVULSIVA > 12 h E ALERTA
+SINAIS VITAIS NORMAIS
+RELATO DE DESMAIO OU SÍNCOPE SEM TCE
+PARESTESIAS BILATERAIS OU MIGRATÓRIAS
+TONTURAS NÃO ROTATÓRIAS
+AZUL
+SINAIS VITAIS NORMAIS
+HISTÓRIA DE CRISE CONVULSIVA/ EPILEPSIA PRECISANDO DE RECEITA MÉDICA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+16,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 65
+Sexo: Feminino
+Fluxogama: Queixas abdominais
+Anamnese: Paciente idosa com dor abdominal difusa e intensa há 12 horas, associada a vômitos. Abdome rígido e doloroso à palpação.
+Sintomas: Dor abdominal intensa; Vômitos; Febre
+Temperatura (°C): 38.2
+Oximetria (%): 96
+Frequência Cardíaca (bpm): 115
+Frequência Respiratória (ipm): 26
+Pressão Sistólica (mmHg): 145
+Pressão Diastólica (mmHg): 90
+Escala de Dor: 10
+Glicemia Capilar (mg/dL): 115
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES DE TEMPERATURA 20-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+FEBRE (T. AXILAR > 38,5º C) EM IMUNO COMPROMETIDOS
+CEFALÉIA INTENSA OU RIGIDEZ DE NUCA
+FEBRE ACOMPANHADA DE VÔMITOS EM JATO
+PRESENÇA DE CRISE CONVUSLIVA
+TEMP < 35º C EM VITIMAS DE AFOGAMENTO
+AMARELO
+ACOMPANHADA DE CEFALÉIA MODERADA (4-7/10)
+ACOMPANHADA DE SANGRAMENTO EM MUCOSAS
+CORRIMENTO GENITAL ASSOCIADO A DOR E FEBRE
+FEBRE (T. AXILAR > 38,5º C) EM IMUNOCOMPETENTES E COM TOXEMIA
+FEBRE COM DURAÇÃO MÁXIMA DE 07 DIAS
+FEBRE VESPERTINA COM RELATO DE PERDA PONDERAL
+HIPOTENSÃO POSTURAL OU LIPOTÍMIA
+PRESENÇA DE DOR ABDOMINAL INTENSA E CONTÍNUA
+PROSTRADO OU TOXEMIADO
+VERDE
+ARTRALGIA E/OU MIALGIA MODERADA (4-7/10)
+CEFALÉIA E/OU DOR RETRORBITÁRIA MODERADA (4-7/10)
+ENJÔO E/OU RELATO DE VÔMITO
+FEBRE (T. AXILAR > 38,5º C) EM IMUNOCOMPETENTES E SEM TOXEMIA
+NÃO APRESENTA SINAIS DE DESIDRATAÇÃO
+NÃO SE APRESENTA PROSTRADO OU TOXEMIADO
+PRESENÇA DE EXANTEMA COM PRURIDO
+PRESENÇA FEBRE (T > 38,5º C) HÁ MAIS DE 03 DIAS
+AZUL
+REPETIÇÃO, CONTROLE E MONITORAMENTO DE EXAMES LABORATORIAIS
+T. AXILAR < 37,5º C
+
+
+Trecho 2:
+
+
+DESCRITOR: QUEIXAS ABDOMINAIS 09-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+TEMPERATURA ≥ 39ºC
+DOR INTENSA GENERALIZADA (8-10/10) QUE AUMENTA OU NÃO DE INTENSIDADE À PALPAÇÃO
+DOR INTENSA LOCALIZADA E BEM DEFINIDA (8-10/10) / QUE AUMENTA OU NÃO DE INTENSIDADE À PALPAÇÃO
+DOR ABDOMINAL INTERMITENTE TIPO CÓLICA COM VÔMITOS E FEZES SANGUINOLENTAS
+PRESENÇA DE RIGIDEZ DO ABDOME
+CRIANÇA PORTADORA DE ANEMIA FALCIFORME
+FERIMENTO COM SANGRAMENTO NÃO COMPRESSÍVEL
+SINAIS DE CHOQUE (HIPOTENSÃO, TAQUICARDIA, SUDORESE, PELE FRIA E ÚMIDA, PALIDEZ ACENTUADA)
+TRAUMA ABDOMINAL COM PERFURAÇÃO POR ARMA BRANCA OU PAF
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEL CRÍTICO (verficar Anexo-6)
+TEMPERATURA ≥ 38º C
+DOR MODERADA (4-7/10) QUE AUMENTA OU NÃO DE INTENSIDADE À PALPAÇÃO
+HISTÓRIA AGUDA DE VÔMITO COM SANGUE
+APRESENTA FEZES DE ASPECTO ENEGRECIDAS OU GROSELHA
+ABDOME DISTENDIDO COM RELATO DE ELIMINAÇÃO DE VERMINOSES
+ABDOME ASCÍTICO ACOMPANHADO DE FEBRE OU DISPNÉIA
+VÔMITOS PERSISTENTES COM SINAIS DE DESIDRATAÇÃO
+
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+DOR LEVE (1-3/10) GENERALIZADA OU LOCALIZADA
+VÔMITOS ESPARÇOS OU RELATO DE VÔMITO
+TEMPERATURA ≤ 37,5ºC
+
+AZUL
+SINAIS VITAIS NORMAIS
+DOR ABDOMINAL DE BAIXA INTENSIDADE OU DURAÇÃO MAIOR QUE 04 DIAS
+TROCA DE SNE (ROTINA)
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+17,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 22
+Sexo: Masculino
+Fluxogama: Trauma Geral
+Anamnese: Paciente vítima de queda de altura (~3m). Dor em quadril direito e tornozelo esquerdo. Deambulação impossível. Sinais vitais estáveis.
+Sintomas: Dor em quadril; Dor em tornozelo; Impotência funcional
+Temperatura (°C): 36.7
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 88
+Frequência Respiratória (ipm): 18
+Pressão Sistólica (mmHg): 128
+Pressão Diastólica (mmHg): 82
+Escala de Dor: 7
+Glicemia Capilar (mg/dL): 98
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS OCULARES 18-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+CONTATO DIRETO COM SUBSTÂNCIA QUÍMICA
+DOR INTENSA (8-10/10) E PRESENÇA DE SINTOMAS
+EXTRAÇÃO TRAUMÁTICA/ OBJETO CRAVADO
+PERDA VISUAL OU DIPLOPIA SÚBITA
+AMARELO
+DOR MODERADA (4-7/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+CELULITE PERIORBITÁRIA
+OLHO AVERMELHADO APÓS CONTATO COM SUBSTÂNCIAS QUÍMICAS E/ OU TRAUMA
+VERDE
+DOR LEVE (1-3/10)
+OLHO AVERMELHADO SEM HISTÓRIA DE TRAUMA OU CONTATO COM SUBSTÂNCIAS QUÍMICAS
+PRESENÇA DE SECREÇÃO PURULENTA
+PRURIDO OCULAR
+AZUL
+MANCHAS HEMORRÁGICAS SEM HISTÓRIA DE TRAUMA
+TERÇOL SEM CELULITE
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+18,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 40
+Sexo: Feminino
+Fluxogama: Mordedura de animal/Acidente com animal peçonhento
+Anamnese: Paciente relata picada de cobra no pé esquerdo há 1 hora. Edema local progressivo e dor intensa.
+Sintomas: Dor local; Edema; Eritema
+Temperatura (°C): 37.0
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 100
+Frequência Respiratória (ipm): 20
+Pressão Sistólica (mmHg): 130
+Pressão Diastólica (mmHg): 84
+Escala de Dor: 8
+Glicemia Capilar (mg/dL): 102
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: MORDEDURA DE ANIMAL / ACIDENTE COM ANIMAL PEÇONHENTO 06-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+DOR INTENSA NO LOCAL DA PICADA ASSOCIADA A PELO MENOS 01 ALTERAÇÃO DE SSVV
+FERIMENTOS PROFUNDOS, MÚLTIPLOS OU EXTENSOS
+SIALORREIA/PARALISIA FACIAL
+MIALGIA GENERALIZADA E/OU VISÃO TURVA
+HEMORRAGIA ATIVA NÃO COMPRESSÍVEL
+CONVULSÃO/ AGITAÇÃO/ DELÍRIO/COMA
+ESTRIDOR LARÍNGEO E/OU FALA ENTRECORTADA
+AMARELO
+SINAIS VITAIS NORMAIS
+DOR MODERADA COM EDEMA / HIPEREMIA NO LOCAL
+ERITEMA NO LOCAL DA LESÃO
+MORDEDURA/ARRANHADURA EM FACE, MÃOS E PÉS (HUMANA OU ANIMAL DESCONHECIDO)
+LAMBEDURA DE MUCOSAS POR ANIMAL DESCONHECIDO
+CONTATO COM ANIMAL ALERGÊNICO (ABELHA, ÁGUA VIVA)
+NÁUSEAS, VÔMITOS OU DIARRÉIA
+VERDE
+SINAIS VITAIS NORMAIS
+DOR E PARESETESIA NO LOCAL
+PROVÁVEL CONTATO COM ANIMAL ALERGÊNICO
+FERIMENTOS SUPERFICIAIS SEM SANGRAMENTOS OU HEMATOMAS
+AZUL
+SINAIS VITAIS NORMAIS
+MORDEDURA/ ARRANHADURA DE PEQUENA EXTENSÃO POR ANIMAL DOMÉSTICO DOMICILIADO
+
+
+Trecho 2:
+
+
+DESCRITOR: PRESSÃO ALTA 17-A
+VERMELHO
+PAS > 220 ou PAD > 130 mmHg COM QUALQUER SINTOMA
+ALTERAÇÕES VISUAIS (VISÃO TURVA E/OU ESCOTOMAS)
+DOR TORÁCICA CARACTERÍSTICA DE ISQUEMIA
+EPISTAXE FRANCA ASSOCIADA A PAS > 220 ou PAD > 130 mmHg
+NÍVEL DE CONSCIÊNCIA ALTERADO (HIPOATIVO/AGITADO)
+SINTOMAS NEUROLÓGICOS (PARESIA, PLEGIA, AFASIA, DISFASIA, ATAXIA)
+AMARELO
+PAS >220 ou PAD>130 mmHg SEM SINTOMAS
+PAS ENTRE 190-220 ou PAD ENTRE 120-130 mmHg COM QUALQUER SINTOMA
+VERDE
+PAS ENTRE 190-220 mmHg SEM SINTOMAS
+PAD ENTRE 110-130 mmHg SEM SINTOMAS
+AZUL
+PAS < 180 E PAD < 110 mmHg ASSINTOMÁTICO
+HISTÓRIA DE HAS PRECISANDO DE RECEITA MÉDICA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+19,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 30
+Sexo: Masculino
+Fluxogama: Intoxicação aguda/Envenenamento
+Anamnese: Paciente encontrado confuso em casa. Frascos de medicamentos psiquiátricos vazios ao lado. Sonolento, porém responsivo a estímulos verbais.
+Sintomas: Sonolência; Confusão; Fala arrastada
+Temperatura (°C): 36.5
+Oximetria (%): 97
+Frequência Cardíaca (bpm): 78
+Frequência Respiratória (ipm): 16
+Pressão Sistólica (mmHg): 115
+Pressão Diastólica (mmHg): 75
+Escala de Dor: 2
+Glicemia Capilar (mg/dL): 95
+Escala de Glasgow: 12
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+Trecho 2:
+
+
+DESCRITOR: QUEIXAS RESPIRATÓRIAS 04-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CIANOSE CENTRAL / EXTREMIDADES ARROXEADAS
+CONFUSÃO MENTAL OU SONOLÊNCIA
+FREQUÊNCIA CARDÍACA < 60 bpm OU ≥ 160 bpm PARA MAIORES DE 2 ANOS
+FREQUÊNCIA CARDÍACA ≥ 180 bpm PARA < DE 2 ANOS
+FREQUÊNCIA RESPIRATÓRIA ≤ 15 (ipm) OU ≥ 60 ipm COM DIFICULDADE DE FALAR
+APRESENTANDO DESCONFORTO RESPIRATÓRIO E CIANOSE POR OVACE
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, PA) ALTERADOS SEM NÍVEIS CRÍTICOS (verficar Anexo-6)
+IRRITABILIDADE EXCESSIVA OU SONOLÊNCIA LEVE
+MODERADA DIFICULDADE RESPIRATÓRIA (TIRAGEM INTERCOSTAL, BATIMENTOS EM ASA DE NARIZ, RETRAÇÃO DE FÚRCULA ESTERNAL, RESPIRAÇÃO SUBDIAFRAGMÁTICA)
+PRESENÇA DE RONQUEIRA OU CHIADO AUDÍVEIS
+PALIDEZ SEM CIANOSE
+FEBRE ≥ 38ºC
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo- 6)
+COR DA PELE NORMAL
+DIFICULDADE RESPIRATÓRIA LEVE (TEMPO EXPIRATÓRIO PROLONGADO) OU AUSENTE
+CORIZA, TOSSE E FEBRE < 38ºC
+MAIORES DE 06 MESES S/NENHUM DOS CRITÉRIOS ACIMA
+NÍVEL DE CONSCIÊNCIA NORMAL
+AZUL
+HISTÓRIA DE DISPNEIA QUE JÁ MELHOROU HÁ 24h E SEM NENHUM SINAL DOS QUADROS ANTERIORES
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+20,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 55
+Sexo: Masculino
+Fluxogama: Dor torácica
+Anamnese: Paciente com dor torácica opressiva súbita irradiando para o braço esquerdo. Histórico de hipertensão e tabagismo.
+Sintomas: Dor opressiva no peito; Dispneia; Diaforese
+Temperatura (°C): 37.3
+Oximetria (%): 94
+Frequência Cardíaca (bpm): 130
+Frequência Respiratória (ipm): 28
+Pressão Sistólica (mmHg): 160
+Pressão Diastólica (mmHg): 100
+Escala de Dor: 8
+Glicemia Capilar (mg/dL): 130
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES DA TEMPERATURA 05-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CIANOSE DE EXTREMIDADES
+EM CRISE CONVULSIVA
+PACIENTE TORPOROSO
+PACIENTES IMUNOCOMPROMETIDOS (ONCOLÓGICOS EM RADIOTERAPIA E QUIMIOTERAPIA, TRANSPLANTADOS, DIABÉTICOS, RENAIS CRÔNICOS, HEPATOPATAS, CARDIOPATAS, EM USO DE CORTICÓIDE)
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CRIANÇA HIPOATIVA
+HISTÓRIA DE CRISE CONVULSIVA
+MENORES DE 02 ANOS
+PACIENTES IMUNOCOMPETENTES
+CRIANÇA COM SINAIS DE TOXEMIA (SONOLÊNCIA, DORES GENERALIZADAS, DIFICULDADE DE DEAMBULAR)
+PORTADORES DE PATOLOGIA CRÔNICA SEM IMUNO DEFICIÊNCIA
+EVACUAÇÕES SEMILÍQUIDAS (EM MENORES DE 01ANO)
+TEMPERATURA < 39ºC OU ≥ 38ºC APÓS SER MEDICADO HÁ MAIS DE 2h E MENOS DE 4h
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+CRIANÇA ATIVA
+VACINAÇÃO RECENTE
+TEMPERATURA ≤ 37,5ºC
+AZUL
+HISTÓRIA DE FEBRE QUE JÁ MELHOROU HÁ 24H E SEM NENHUM SINAL DOS QUADROS ANTERIORES
+
+
+Trecho 2:
+
+
+PULSO/ FREQUÊNCIA CARDÍACA
+NORMAL De 60 a 80 Bpm
+TAQUICARDIA ≥ de 100 bpm
+BRADICARDIA ≤ de 60 bpm.
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+21,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 27
+Sexo: Feminino
+Fluxogama: Sangramentos
+Anamnese: Paciente com epistaxe há 45 minutos. Sangramento ativo e volumoso, não controlado com compressão local.
+Sintomas: Sangramento nasal ativo; Tontura
+Temperatura (°C): 36.6
+Oximetria (%): 97
+Frequência Cardíaca (bpm): 105
+Frequência Respiratória (ipm): 20
+Pressão Sistólica (mmHg): 125
+Pressão Diastólica (mmHg): 78
+Escala de Dor: 2
+Glicemia Capilar (mg/dL): 100
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+Trecho 2:
+
+
+DESCRITOR: ALTERAÇÕES GLICÊMICAS 16-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+GLICEMIA CAPILAR < 50 (LO) OU > 500 mg/dL (HI)
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA (LETARGIA, AGITAÇÃO, CONFUSÃO, COMA)
+DISPNÉIA (RÁPIDA E PROFUNDA)
+SUDORESE PROFUSA ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+AMARELO
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 320 ou < 50 mg/dL
+SINAIS DE DESIDRATAÇÃO LEVE/MODERADA
+SPO2 ENTRE 93 e 95%
+VERDE
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 250 mg/dL ASSINTOMÁTICO
+AZUL
+GLICEMIA CAPILAR < 250 mg/dl ASSINTOMÁTICO
+HISTÓRIA DE DIABETES PRECISANDO DE RECEITA MÉDICA E/OU SOLICITAÇÃO DE EXAMES
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+22,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 70
+Sexo: Masculino
+Fluxogama: Queixas urinárias
+Anamnese: Paciente idoso com retenção urinária há 8 horas. Dor suprapúbica intensa. Histórico de HPB.
+Sintomas: Incapacidade de urinar; Dor suprapúbica
+Temperatura (°C): 37.1
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 95
+Frequência Respiratória (ipm): 19
+Pressão Sistólica (mmHg): 150
+Pressão Diastólica (mmHg): 90
+Escala de Dor: 8
+Glicemia Capilar (mg/dL): 108
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS URINÁRIAS 10-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+AMARELO
+SINAIS VITAIS NORMAIS
+DISÚRIA INTENSA COM POLACIÚRIA E/OU HEMATÚRIA
+DISÚRIA COM PRESENÇA DE SECREÇÃO URETRAL E DOR SUPRAPÚBICA
+DOR, EDEMA E HIPEREMIA DE ESCROTO
+PRESENÇA DE PRIAPRISMO EM PORTADORES DE FALCEMIA
+INTERVENÇÕES CIRÚRGICAS RECENTES EM PRÓSTATA
+PROSTRAÇÃO E/OU FEBRE T > 38º C
+RETENÇÃO URINÁRIA AGUDA COM BEXIGOMA
+VERDE
+DISÚRIA COM OU SEM RELATO DE FEBRE
+DIFICULDADE DE INICIAR A MICÇÃO COM DISÚRIA
+TRAUMA SUPERFICIAL EM GENITÁLIA EXTERNA
+SVD OBSTRUÍDA E/OU ASSOCIADA A QUEIXA DE DOR PÉLVICA/ABDOMINAL
+AZUL
+TROCA DE SONDA VESICAL DE DEMORA (ROTINA)
+
+
+Trecho 2:
+
+
+DESCRITOR: ALTERAÇÕES DA TEMPERATURA 05-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CIANOSE DE EXTREMIDADES
+EM CRISE CONVULSIVA
+PACIENTE TORPOROSO
+PACIENTES IMUNOCOMPROMETIDOS (ONCOLÓGICOS EM RADIOTERAPIA E QUIMIOTERAPIA, TRANSPLANTADOS, DIABÉTICOS, RENAIS CRÔNICOS, HEPATOPATAS, CARDIOPATAS, EM USO DE CORTICÓIDE)
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CRIANÇA HIPOATIVA
+HISTÓRIA DE CRISE CONVULSIVA
+MENORES DE 02 ANOS
+PACIENTES IMUNOCOMPETENTES
+CRIANÇA COM SINAIS DE TOXEMIA (SONOLÊNCIA, DORES GENERALIZADAS, DIFICULDADE DE DEAMBULAR)
+PORTADORES DE PATOLOGIA CRÔNICA SEM IMUNO DEFICIÊNCIA
+EVACUAÇÕES SEMILÍQUIDAS (EM MENORES DE 01ANO)
+TEMPERATURA < 39ºC OU ≥ 38ºC APÓS SER MEDICADO HÁ MAIS DE 2h E MENOS DE 4h
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+CRIANÇA ATIVA
+VACINAÇÃO RECENTE
+TEMPERATURA ≤ 37,5ºC
+AZUL
+HISTÓRIA DE FEBRE QUE JÁ MELHOROU HÁ 24H E SEM NENHUM SINAL DOS QUADROS ANTERIORES
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+23,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 33
+Sexo: Feminino
+Fluxogama: Dor cervical/Dorsal/Lombar ou extremidades
+Anamnese: Paciente com dor lombar intensa após levantar peso. Dor irradia para perna direita com parestesia.
+Sintomas: Dor lombar; Ciatalgia; Parestesia
+Temperatura (°C): 36.9
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 85
+Frequência Respiratória (ipm): 18
+Pressão Sistólica (mmHg): 126
+Pressão Diastólica (mmHg): 80
+Escala de Dor: 8
+Glicemia Capilar (mg/dL): 99
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: DOR CERVICAL/ DORSAL/ LOMBAR OU EXTREMIDADES 11-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+DOR INTENSA (8-10/10) AGUDA COM SINAIS DE ISQUEMIA OU ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+PACIENTE PORTADOR DE FALCEMIA EM CRISE ÁLGICA
+AMARELO
+DOR MODERADA (4-7/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+FEBRE E PRESENÇA DE SINAIS FLOGÍSTICOS LOCAIS
+DOR EM MMII PERSISTENTE COM EDEMA E RIGIDEZ EM PANTURRILHA
+LIMITAÇÃO IMPORTANTE DOS MOVIMENTOS/FUNÇÃO
+LOMBALGIA QUE IMPEDE DEAMBULAÇÃO OU IRRADIA PARA MMII
+VERDE
+SINAIS VITAIS NORMAIS
+ATRALGIA COM LIMITAÇÕES SEM SINAIS FLOGÍSTICOS
+LIMITAÇÃO LEVE DOS MOVIMENTOS/ SEM PERDA DE FUNÇÃO
+DOR LEVE (1-3/10)
+AZUL
+SINAIS VITAIS NORMAIS
+DOR CRÔNICA OU RECORRENTE
+LOMBALGIA CRÔNICA NÃO TRAUMÁtica
+NENHUM DOS DETERMINANTES ANTERIORES
+SEM EDEMA OU SINAIS FLOGÍSTICOS LOCAIS
+
+
+Trecho 2:
+
+
+DESCRITOR: PRESSÃO ALTA 17-A
+VERMELHO
+PAS > 220 ou PAD > 130 mmHg COM QUALQUER SINTOMA
+ALTERAÇÕES VISUAIS (VISÃO TURVA E/OU ESCOTOMAS)
+DOR TORÁCICA CARACTERÍSTICA DE ISQUEMIA
+EPISTAXE FRANCA ASSOCIADA A PAS > 220 ou PAD > 130 mmHg
+NÍVEL DE CONSCIÊNCIA ALTERADO (HIPOATIVO/AGITADO)
+SINTOMAS NEUROLÓGICOS (PARESIA, PLEGIA, AFASIA, DISFASIA, ATAXIA)
+AMARELO
+PAS >220 ou PAD>130 mmHg SEM SINTOMAS
+PAS ENTRE 190-220 ou PAD ENTRE 120-130 mmHg COM QUALQUER SINTOMA
+VERDE
+PAS ENTRE 190-220 mmHg SEM SINTOMAS
+PAD ENTRE 110-130 mmHg SEM SINTOMAS
+AZUL
+PAS < 180 E PAD < 110 mmHg ASSINTOMÁTICO
+HISTÓRIA DE HAS PRECISANDO DE RECEITA MÉDICA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+24,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 18
+Sexo: Masculino
+Fluxogama: Feridas e abscessos
+Anamnese: Paciente com abscesso em região glútea, flutuante, com sinais flogísticos e dor intensa. Sem febre.
+Sintomas: Abscesso doloroso; Eritema; Edema local
+Temperatura (°C): 38.0
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 92
+Frequência Respiratória (ipm): 19
+Pressão Sistólica (mmHg): 124
+Pressão Diastólica (mmHg): 78
+Escala de Dor: 7
+Glicemia Capilar (mg/dL): 101
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: FERIDAS E ABSCESSOS 07-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+TEMPERATURA ≥ 39ºC
+MIÍASE COM INFESTAÇÃO INTENSA EM FACE
+FERIDA DE SANGRAMENTO NÃO COMPRESSÍVEL
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEIS CRÍTICOS (verficar Anexo-6)
+MENORES DE 02 MESES
+MIÍASE COM INFESTAÇÃO INTENSA
+ABSCESSO COM FLUTUAÇÃO OU DOR INTENSA (8-10/10)
+PRESENÇA DE TEMP AXILAR ≥ 38º C
+FERIDA DE SANGRAMENTO COMPRESSÍVEL
+INFECÇÃO DE PARTES MOLES COM SINAIS FLOGÍSTICOS
+FERIDA COM NECROSE/MUMIFICADA
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+ABSCESSO SEM FLUTUAÇÃO COM DOR LEVE/MODERADA (1-7/10)
+FERIDA INFECTADA SEM SINAIS SISTÊMICOS
+FERIDA PEQUENA, SUPERFICIAL, SEM SANGRAMENTO OU HEMATOMA
+SINAIS FLOGÍSTICOS EM REGIÃO GENITAL
+AZUL
+LIMPA SEM SINAIS SISTÊMICOS DE INFECÇÃO
+TROCA DE CURATIVO OU RETIRADA DE PONTOS
+SINAIS DE DESIDRATAÇÃO/VÔMITOS
+
+
+Trecho 2:
+
+
+DESCRITOR: EDEMA/ ICTERÍCIA/ FRAQUEZA/ CÂIMBRA 21-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA
+EDEMA GENERALIZADO (ANASARCA) ASSOCIADO À DOR E/OU DISPNEIA INTENSA
+AMARELO
+EDEMA GENERALIZADO (ANASARCA)
+EDEMA LOCALIZADO COM PRESENÇA DE SINAIS FLOGÍSTICOS
+PROSTRADO, FEBRIL OU TOXEMIADO
+PERDA PONDERAL IMPORTANTE HÁ MENOS DE 15 DIAS
+VERDE
+SINAIS VITAIS NORMAIS
+EDEMA LOCALIZADO SEM SINAIS FLOGÍSTICOS
+FRAQUEZA OU CÂIMBRAS SEM OUTROS SINTOMAS
+NÃO ESTÁ PROSTRADO OU TOXEMIADO
+AZUL
+NENHUM DOS DETERMINANTES ANTERIORES
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+25,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 75
+Sexo: Masculino
+Fluxogama: Queixas respiratórias
+Anamnese: Paciente idoso com dispneia súbita e dor torácica pleurítica. Histórico de trombose venosa profunda.
+Sintomas: Dispneia súbita; Dor torácica; Taquipneia
+Temperatura (°C): 37.2
+Oximetria (%): 89
+Frequência Cardíaca (bpm): 120
+Frequência Respiratória (ipm): 32
+Pressão Sistólica (mmHg): 140
+Pressão Diastólica (mmHg): 88
+Escala de Dor: 5
+Glicemia Capilar (mg/dL): 115
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS RESPIRATÓRIAS 14-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ENCHIMENTO CAPILAR > 2s / CIANOSE DE EXTREMIDADES
+LETARGIA E/OU CONFUSÃO MENTAL
+ESTRIDOR LARÍNGEO OU DIFICULDADE PARA FALAR
+SINAIS DE CHOQUE/ DISFUNÇÃO HEMODINÂMICA
+APRESENTANDO DESCONFORTO RESPIRATÓRIO E CIANOSE POR OVACE
+AMARELO
+SPO2 ≥95%
+FR ≤28 ou ≥35 ipm
+ESFORÇO RESPIRATÓRIO MODERADO
+PRESENÇA DE SIBILÂNCIA
+EXPCTORAÇÃO ESVERDEADA OU HEMOPTISE
+PRESENÇA DE FEBRE (TAX ≥38,5º/<40,9º C)
+VERDE
+SINAIS VITAIS NORMAIS
+ESFORÇO RESPIRATÓRIO LEVE
+DOR TORÁCICA VENTILATÓRIA OU AO TOSSIR
+HISTÓRIA DE CHIEIRA NOTURNA
+TOSSE E CORIZA SEM FEBRE
+AZUL
+SINAIS VITAIS NORMAIS
+TOSSE SECA
+
+
+Trecho 2:
+
+
+PROTOCOLO DE ACOLHIMENTO COM CLASSIFICAÇÃO DE RISCO
+DESCRITORES DO PERFIL PEDIÁTRICO: 01 a 16-B
+
+DESCRITOR: PARADA CÁRDIORESPIRATÓRIA (PCR) 01-B
+VERMELHO
+CRIANÇA ATENDIDA SEM DADOS VITAIS
+INCONSCIENTE E SEM RESPIRAR
+AUSÊNCIA DE PULSO CENTRAL
+COM FC ≤ 60 bpm E SINAIS DE HIPOPERFUSÃO TECIDUAL
+CIANOSE CENTRAL
+COM RESPIRAÇÃO IRREGULAR (ACIMA DE 01 ANO > 50 ipm/ ABAIXO DE 01 ANO > 60 ipm).
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+26,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 29
+Sexo: Feminino
+Fluxogama: Afecções cutâneas/anafilaxia
+Anamnese: Paciente com exantema generalizado e edema de face após ingestão de amendoim. Dispneia leve.
+Sintomas: Urticária; Edema facial; Dispneia leve
+Temperatura (°C): 36.7
+Oximetria (%): 95
+Frequência Cardíaca (bpm): 110
+Frequência Respiratória (ipm): 24
+Pressão Sistólica (mmHg): 125
+Pressão Diastólica (mmHg): 80
+Escala de Dor: 3
+Glicemia Capilar (mg/dL): 98
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: EDEMA/ ICTERÍCIA/ FRAQUEZA/ CÂIMBRA 21-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA
+EDEMA GENERALIZADO (ANASARCA) ASSOCIADO À DOR E/OU DISPNEIA INTENSA
+AMARELO
+EDEMA GENERALIZADO (ANASARCA)
+EDEMA LOCALIZADO COM PRESENÇA DE SINAIS FLOGÍSTICOS
+PROSTRADO, FEBRIL OU TOXEMIADO
+PERDA PONDERAL IMPORTANTE HÁ MENOS DE 15 DIAS
+VERDE
+SINAIS VITAIS NORMAIS
+EDEMA LOCALIZADO SEM SINAIS FLOGÍSTICOS
+FRAQUEZA OU CÂIMBRAS SEM OUTROS SINTOMAS
+NÃO ESTÁ PROSTRADO OU TOXEMIADO
+AZUL
+NENHUM DOS DETERMINANTES ANTERIORES
+
+
+Trecho 2:
+
+
+DESCRITOR: PRESSÃO ALTA 17-A
+VERMELHO
+PAS > 220 ou PAD > 130 mmHg COM QUALQUER SINTOMA
+ALTERAÇÕES VISUAIS (VISÃO TURVA E/OU ESCOTOMAS)
+DOR TORÁCICA CARACTERÍSTICA DE ISQUEMIA
+EPISTAXE FRANCA ASSOCIADA A PAS > 220 ou PAD > 130 mmHg
+NÍVEL DE CONSCIÊNCIA ALTERADO (HIPOATIVO/AGITADO)
+SINTOMAS NEUROLÓGICOS (PARESIA, PLEGIA, AFASIA, DISFASIA, ATAXIA)
+AMARELO
+PAS >220 ou PAD>130 mmHg SEM SINTOMAS
+PAS ENTRE 190-220 ou PAD ENTRE 120-130 mmHg COM QUALQUER SINTOMA
+VERDE
+PAS ENTRE 190-220 mmHg SEM SINTOMAS
+PAD ENTRE 110-130 mmHg SEM SINTOMAS
+AZUL
+PAS < 180 E PAD < 110 mmHg ASSINTOMÁTICO
+HISTÓRIA DE HAS PRECISANDO DE RECEITA MÉDICA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+28,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 50
+Sexo: Feminino
+Fluxogama: Alterações glicêmicas
+Anamnese: Paciente diabética encontrada sonolenta em casa. Glicemia capilar indelevelmente alta. Respirações de Kussmaul.
+Sintomas: Sonolência; Polipneia; Desidratação
+Temperatura (°C): 37.8
+Oximetria (%): 96
+Frequência Cardíaca (bpm): 120
+Frequência Respiratória (ipm): 28
+Pressão Sistólica (mmHg): 85
+Pressão Diastólica (mmHg): 55
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 680
+Escala de Glasgow: 12
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES GLICÊMICAS 16-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+GLICEMIA CAPILAR < 50 (LO) OU > 500 mg/dL (HI)
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA (LETARGIA, AGITAÇÃO, CONFUSÃO, COMA)
+DISPNÉIA (RÁPIDA E PROFUNDA)
+SUDORESE PROFUSA ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+AMARELO
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 320 ou < 50 mg/dL
+SINAIS DE DESIDRATAÇÃO LEVE/MODERADA
+SPO2 ENTRE 93 e 95%
+VERDE
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 250 mg/dL ASSINTOMÁTICO
+AZUL
+GLICEMIA CAPILAR < 250 mg/dl ASSINTOMÁTICO
+HISTÓRIA DE DIABETES PRECISANDO DE RECEITA MÉDICA E/OU SOLICITAÇÃO DE EXAMES
+
+
+Trecho 2:
+
+
+DESCRITOR: SANGRAMENTOS 09-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA
+COMPROMETIMENTO DAS VIAS AEREAS
+EPISTAXE FRANCA ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+HEMATÊMESE VOLUMOSA/HEMOPTISE FRANCA
+MELENA / HEMATOQUEZIA COM INSTABILIDADE HEMODINÂMICA
+AMARELO
+EPISTAXE COM PA < 180/110 mmHg USUÁRIO DE ANTICOAGULANTE
+HEMATÊMESE/MELENA COM SSNV NORMAIS
+HEMATOQUEZIA OU HEMOPTISE COM SSNV NORMAIS
+PORTADOR DE CIRROSE HEPÁTICA OU COAGULOPATIA
+PORTADOR DE DIABETES E/OU FAZ USO DE ANTICOAGULANTE
+SANGRAMENTO DE MUCOSAS (GENGIVAS, LÁBIOS)
+SANGRAMENTO HEMORROIDÁRIO COM DOR INTENSA (8-10/10)
+VERDE
+SINAIS VITAIS NORMAIS
+RELATO DE HEMATÊMESE, HEMATOQUESIA
+RELATO DE HEMOPTISE LEVE (RAIAS DE SANGUE)
+RELATO DE MELENA (NORMAL NO MOMENTO)
+SANGRAMENTO HEMORROIDÁRIO DISCRETO E DOR LEVE/MODERADA (1-7/10)
+AZUL
+ATRASO MENSTRUAL SEM OUTROS SINTOMAS
+NENHUM DOS DETERMINANTES ANTERIORES
+RELATO DE EPISTAXE
+RELATO DE SANGRAMENTO HEMORROIDÁRIO
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+29,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 31
+Sexo: Masculino
+Fluxogama: Dor torácica
+Anamnese: Paciente com dor torácica esmagadora súbita, sudorese fria e palidez. História prévia de IAM.
+Sintomas: Dor torácica intensa; Diaforese; Náuseas
+Temperatura (°C): 36.9
+Oximetria (%): 93
+Frequência Cardíaca (bpm): 45
+Frequência Respiratória (ipm): 10
+Pressão Sistólica (mmHg): 70
+Pressão Diastólica (mmHg): 40
+Escala de Dor: 10
+Glicemia Capilar (mg/dL): 120
+Escala de Glasgow: 14
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: DOR TORÁCICA 08-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+DOR INTENSA EM PESO, OPRESSÃO, QUEIMAÇÃO, DESCONFORTO/ ANSIEDADE
+IRRADIA: PESCOÇO, OMBROS, MANDÍBULA, BRAÇO, DORSO OU EPIGÁSTRIO
+NAUSEAS / VÔMITOS/ DISPNÉIA / SUDORESE FRIA / PALIDEZ
+AMARELO
+SINAIS VITAIS NORMAIS
+DOR MODERADA (3-7/10) QUE PIORA COM RESPIRAÇÃO PROFUNDA / TOSSE / DISPNEIA / PALPAÇÃO
+CARDIOPATIA PRÉVIA E/OU DIABETES E/OU HIPERTENSÃO
+VERDE
+SINAIS VITAIS NORMAIS
+DOR À PALPAÇÃO DE CARACTERÍSTICA MUSCULAR
+DOR AGUDA LEVE SEM HISTÓRIA DE CARDIOPATIA
+AZUL
+SINAIS VITAIS NORMAIS
+DOR TORÁCICA HÁ MAIS DE 07 DIAS
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+30,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 85
+Sexo: Feminino
+Fluxogama: Queixas respiratórias
+Anamnese: Idosa com DPOC em uso de O2 em casa. Apresenta piora abrupta da dispneia, confusão mental e cianose.
+Sintomas: Dispneia em repouso; Confusão; Cianose
+Temperatura (°C): 37.0
+Oximetria (%): 82
+Frequência Cardíaca (bpm): 130
+Frequência Respiratória (ipm): 35
+Pressão Sistólica (mmHg): 180
+Pressão Diastólica (mmHg): 100
+Escala de Dor: 4
+Glicemia Capilar (mg/dL): 110
+Escala de Glasgow: 12
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS RESPIRATÓRIAS 14-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ENCHIMENTO CAPILAR > 2s / CIANOSE DE EXTREMIDADES
+LETARGIA E/OU CONFUSÃO MENTAL
+ESTRIDOR LARÍNGEO OU DIFICULDADE PARA FALAR
+SINAIS DE CHOQUE/ DISFUNÇÃO HEMODINÂMICA
+APRESENTANDO DESCONFORTO RESPIRATÓRIO E CIANOSE POR OVACE
+AMARELO
+SPO2 ≥95%
+FR ≤28 ou ≥35 ipm
+ESFORÇO RESPIRATÓRIO MODERADO
+PRESENÇA DE SIBILÂNCIA
+EXPCTORAÇÃO ESVERDEADA OU HEMOPTISE
+PRESENÇA DE FEBRE (TAX ≥38,5º/<40,9º C)
+VERDE
+SINAIS VITAIS NORMAIS
+ESFORÇO RESPIRATÓRIO LEVE
+DOR TORÁCICA VENTILATÓRIA OU AO TOSSIR
+HISTÓRIA DE CHIEIRA NOTURNA
+TOSSE E CORIZA SEM FEBRE
+AZUL
+SINAIS VITAIS NORMAIS
+TOSSE SECA
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+32,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 22
+Sexo: Feminino
+Fluxogama: Sangramentos
+Anamnese: Paciente em primeiro trimestre de gestação com sangramento vaginal abundante, cólicas e tontura ao levantar.
+Sintomas: Sangramento ativo; Tontura; Cólicas abdominais
+Temperatura (°C): 36.7
+Oximetria (%): 97
+Frequência Cardíaca (bpm): 115
+Frequência Respiratória (ipm): 22
+Pressão Sistólica (mmHg): 100
+Pressão Diastólica (mmHg): 60
+Escala de Dor: 6
+Glicemia Capilar (mg/dL): 95
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+Trecho 2:
+
+
+DESCRITOR: DOR CERVICAL/ DORSAL/ LOMBAR OU EXTREMIDADES 11-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+DOR INTENSA (8-10/10) AGUDA COM SINAIS DE ISQUEMIA OU ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+PACIENTE PORTADOR DE FALCEMIA EM CRISE ÁLGICA
+AMARELO
+DOR MODERADA (4-7/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+FEBRE E PRESENÇA DE SINAIS FLOGÍSTICOS LOCAIS
+DOR EM MMII PERSISTENTE COM EDEMA E RIGIDEZ EM PANTURRILHA
+LIMITAÇÃO IMPORTANTE DOS MOVIMENTOS/FUNÇÃO
+LOMBALGIA QUE IMPEDE DEAMBULAÇÃO OU IRRADIA PARA MMII
+VERDE
+SINAIS VITAIS NORMAIS
+ATRALGIA COM LIMITAÇÕES SEM SINAIS FLOGÍSTICOS
+LIMITAÇÃO LEVE DOS MOVIMENTOS/ SEM PERDA DE FUNÇÃO
+DOR LEVE (1-3/10)
+AZUL
+SINAIS VITAIS NORMAIS
+DOR CRÔNICA OU RECORRENTE
+LOMBALGIA CRÔNICA NÃO TRAUMÁtica
+NENHUM DOS DETERMINANTES ANTERIORES
+SEM EDEMA OU SINAIS FLOGÍSTICOS LOCAIS
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+33,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 68
+Sexo: Masculino
+Fluxogama: Alterações glicêmicas
+Anamnese: Diabético idoso, muito sonolento, incapaz de ingerir carboidratos. Glicemia muito baixa.
+Sintomas: Sonolência; Confusão; Fraqueza
+Temperatura (°C): 36.3
+Oximetria (%): 96
+Frequência Cardíaca (bpm): 65
+Frequência Respiratória (ipm): 14
+Pressão Sistólica (mmHg): 100
+Pressão Diastólica (mmHg): 65
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 38
+Escala de Glasgow: 10
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES GLICÊMICAS 16-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+GLICEMIA CAPILAR < 50 (LO) OU > 500 mg/dL (HI)
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA (LETARGIA, AGITAÇÃO, CONFUSÃO, COMA)
+DISPNÉIA (RÁPIDA E PROFUNDA)
+SUDORESE PROFUSA ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+AMARELO
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 320 ou < 50 mg/dL
+SINAIS DE DESIDRATAÇÃO LEVE/MODERADA
+SPO2 ENTRE 93 e 95%
+VERDE
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 250 mg/dL ASSINTOMÁTICO
+AZUL
+GLICEMIA CAPILAR < 250 mg/dl ASSINTOMÁTICO
+HISTÓRIA DE DIABETES PRECISANDO DE RECEITA MÉDICA E/OU SOLICITAÇÃO DE EXAMES
+
+
+Trecho 2:
+
+
+DESCRITOR: SANGRAMENTOS 09-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA
+COMPROMETIMENTO DAS VIAS AEREAS
+EPISTAXE FRANCA ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+HEMATÊMESE VOLUMOSA/HEMOPTISE FRANCA
+MELENA / HEMATOQUEZIA COM INSTABILIDADE HEMODINÂMICA
+AMARELO
+EPISTAXE COM PA < 180/110 mmHg USUÁRIO DE ANTICOAGULANTE
+HEMATÊMESE/MELENA COM SSNV NORMAIS
+HEMATOQUEZIA OU HEMOPTISE COM SSNV NORMAIS
+PORTADOR DE CIRROSE HEPÁTICA OU COAGULOPATIA
+PORTADOR DE DIABETES E/OU FAZ USO DE ANTICOAGULANTE
+SANGRAMENTO DE MUCOSAS (GENGIVAS, LÁBIOS)
+SANGRAMENTO HEMORROIDÁRIO COM DOR INTENSA (8-10/10)
+VERDE
+SINAIS VITAIS NORMAIS
+RELATO DE HEMATÊMESE, HEMATOQUESIA
+RELATO DE HEMOPTISE LEVE (RAIAS DE SANGUE)
+RELATO DE MELENA (NORMAL NO MOMENTO)
+SANGRAMENTO HEMORROIDÁRIO DISCRETO E DOR LEVE/MODERADA (1-7/10)
+AZUL
+ATRASO MENSTRUAL SEM OUTROS SINTOMAS
+NENHUM DOS DETERMINANTES ANTERIORES
+RELATO DE EPISTAXE
+RELATO DE SANGRAMENTO HEMORROIDÁRIO
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+34,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 45
+Sexo: Feminino
+Fluxogama: Crise convulsiva/Alterações neurológicas
+Anamnese: Paciente epiléptica em status pós-ictal após crise prolongada. Sonolenta, porpora-se a estímulos.
+Sintomas: Sonolência; Desorientação; Cefaleia
+Temperatura (°C): 37.2
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 100
+Frequência Respiratória (ipm): 20
+Pressão Sistólica (mmHg): 140
+Pressão Diastólica (mmHg): 90
+Escala de Dor: 3
+Glicemia Capilar (mg/dL): 105
+Escala de Glasgow: 12
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: ALTERAÇÕES DA TEMPERATURA 05-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CIANOSE DE EXTREMIDADES
+EM CRISE CONVULSIVA
+PACIENTE TORPOROSO
+PACIENTES IMUNOCOMPROMETIDOS (ONCOLÓGICOS EM RADIOTERAPIA E QUIMIOTERAPIA, TRANSPLANTADOS, DIABÉTICOS, RENAIS CRÔNICOS, HEPATOPATAS, CARDIOPATAS, EM USO DE CORTICÓIDE)
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CRIANÇA HIPOATIVA
+HISTÓRIA DE CRISE CONVULSIVA
+MENORES DE 02 ANOS
+PACIENTES IMUNOCOMPETENTES
+CRIANÇA COM SINAIS DE TOXEMIA (SONOLÊNCIA, DORES GENERALIZADAS, DIFICULDADE DE DEAMBULAR)
+PORTADORES DE PATOLOGIA CRÔNICA SEM IMUNO DEFICIÊNCIA
+EVACUAÇÕES SEMILÍQUIDAS (EM MENORES DE 01ANO)
+TEMPERATURA < 39ºC OU ≥ 38ºC APÓS SER MEDICADO HÁ MAIS DE 2h E MENOS DE 4h
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+CRIANÇA ATIVA
+VACINAÇÃO RECENTE
+TEMPERATURA ≤ 37,5ºC
+AZUL
+HISTÓRIA DE FEBRE QUE JÁ MELHOROU HÁ 24H E SEM NENHUM SINAL DOS QUADROS ANTERIORES
+
+
+Trecho 2:
+
+
+DESCRITOR: CRISE CONVULSIVA/ ALTERAÇÕES NEUROLÓGICAS 13-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ESCALA COMA DE GLASGOW (3 a 8)
+ALTERAÇÃO SÚBITA DO EQUILÍBRIO COM NÁUSEAS E VÔMITOS
+CONVULSÃO EM ATIVIDADE
+DÉFICIT AGUDO (PARESIA, PLEGIA, DISFASIA, AFASIA, PARALISIA FACIAL)
+EM PÓS COMICIAL, TORPOROSO E/OU COMATOSO
+AMARELO
+SINAIS VITAIS NORMAIS
+EPILEPSIA PRÉVIA COM CRISE NAS ÚLTIMAS 24 h
+ESTADO PÓS COMICIAL E ALERTA
+PRIMEIRO EPISÓDIO DE CRISE CONVULSIVA
+RELATO DE DESMAIO OU SÍNCOPE COM TCE
+TONTEIRA ROTATÓRIA EM REPOUSO
+VERDE
+CRISE CONVULSIVA > 12 h E ALERTA
+SINAIS VITAIS NORMAIS
+RELATO DE DESMAIO OU SÍNCOPE SEM TCE
+PARESTESIAS BILATERAIS OU MIGRATÓRIAS
+TONTURAS NÃO ROTATÓRIAS
+AZUL
+SINAIS VITAIS NORMAIS
+HISTÓRIA DE CRISE CONVULSIVA/ EPILEPSIA PRECISANDO DE RECEITA MÉDICA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+35,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 15
+Sexo: Masculino
+Fluxogama: Trauma Geral
+Anamnese: Adolescente vítima de queda de skate. Suspeita de fratura exposta em tornozelo direito. Dor intensa.
+Sintomas: Dor intensa; Deformidade; Ferimento exposto
+Temperatura (°C): 36.8
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 105
+Frequência Respiratória (ipm): 20
+Pressão Sistólica (mmHg): 125
+Pressão Diastólica (mmHg): 80
+Escala de Dor: 9
+Glicemia Capilar (mg/dL): 100
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS OCULARES 18-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+CONTATO DIRETO COM SUBSTÂNCIA QUÍMICA
+DOR INTENSA (8-10/10) E PRESENÇA DE SINTOMAS
+EXTRAÇÃO TRAUMÁTICA/ OBJETO CRAVADO
+PERDA VISUAL OU DIPLOPIA SÚBITA
+AMARELO
+DOR MODERADA (4-7/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+CELULITE PERIORBITÁRIA
+OLHO AVERMELHADO APÓS CONTATO COM SUBSTÂNCIAS QUÍMICAS E/ OU TRAUMA
+VERDE
+DOR LEVE (1-3/10)
+OLHO AVERMELHADO SEM HISTÓRIA DE TRAUMA OU CONTATO COM SUBSTÂNCIAS QUÍMICAS
+PRESENÇA DE SECREÇÃO PURULENTA
+PRURIDO OCULAR
+AZUL
+MANCHAS HEMORRÁGICAS SEM HISTÓRIA DE TRAUMA
+TERÇOL SEM CELULITE
+
+
+Trecho 2:
+
+
+DESCRITOR: TRAUMA GERAL 05-A
+VERMELHO
+DADOS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+AMPUTAÇÃO E/OU AVULSÃO (EXCETO DENTÁRIA)
+DOR INTENSA (8-10/10) ASSOCIADA A PELO MENOS 01 ALTERAÇÃO DE SSVV
+INSTABILIDADE PÉLVICA
+PRESENÇA DE RIGIDEZ DO ABDOME
+FERIMENTO EXTENSO COM SANGRAMENTO NÃO COMPRESSÍVEL
+FRATURAS EXPOSTAS (TIPO II, III-A, III-B, III-C Classificação de Gustillo)
+PERDA DE CONSCIÊNCIA
+SINAIS DE CHOQUE (HIPOTENSÃO, TAQUICARDIA, PALIDEZ, SUDORESE, TREMORES)
+TRAUMA TORÁCICO OU ABDOMINAL COM PERFURAÇÃO POR ARMA BRANCA OU PAF
+AMARELO
+SINAIS VITAIS NORMAIS
+DOR MODERADA (4-7/10) ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+FERIMENTOS MENORES COM/SEM SANGRAMENTO ATIVO
+FRATURA EXPOSTA (TIPO I Classificação de Gustillo)
+FRATURA OU LUXAÇÃO COM DEFORMIDADE
+PRESENÇA DE TATUAGEM TRAUMÁTICA
+TRAUMA TORÁCICO SEM DISPNÉIA
+VERDE
+SINAIS VITAIS NORMAIS
+CONTUSÕES, ESCORIAÇÕES OU TORÇÕES COM EDEMA LOCAL
+DOR LEVE (1-3/10)
+EVENTO (TRAUMA) HÁ MAIS DE 06 h
+FRATURA DENTAL/AVULSÃO DENTÁRIA
+AZUL
+SINAIS VITAIS NORMAIS
+FERIMENTOS QUE NÃO REQUEREM INTERVENÇÕES
+MIALGIA, ESCORIAÇÕES
+OCORRÊNCIA HÁ MAIS DE 7 DIAS
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+36,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 60
+Sexo: Feminino
+Fluxogama: Queixas abdominais
+Anamnese: Paciente com dor em quadrante superior direito, febre e icterícia. Histórico de colelitíase.
+Sintomas: Dor abdominal; Febre; Icterícia
+Temperatura (°C): 38.7
+Oximetria (%): 97
+Frequência Cardíaca (bpm): 100
+Frequência Respiratória (ipm): 22
+Pressão Sistólica (mmHg): 135
+Pressão Diastólica (mmHg): 85
+Escala de Dor: 8
+Glicemia Capilar (mg/dL): 110
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: EDEMA/ ICTERÍCIA/ FRAQUEZA/ CÂIMBRA 21-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA
+EDEMA GENERALIZADO (ANASARCA) ASSOCIADO À DOR E/OU DISPNEIA INTENSA
+AMARELO
+EDEMA GENERALIZADO (ANASARCA)
+EDEMA LOCALIZADO COM PRESENÇA DE SINAIS FLOGÍSTICOS
+PROSTRADO, FEBRIL OU TOXEMIADO
+PERDA PONDERAL IMPORTANTE HÁ MENOS DE 15 DIAS
+VERDE
+SINAIS VITAIS NORMAIS
+EDEMA LOCALIZADO SEM SINAIS FLOGÍSTICOS
+FRAQUEZA OU CÂIMBRAS SEM OUTROS SINTOMAS
+NÃO ESTÁ PROSTRADO OU TOXEMIADO
+AZUL
+NENHUM DOS DETERMINANTES ANTERIORES
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+37,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 35
+Sexo: Masculino
+Fluxogama: Cefaleia
+Anamnese: Paciente com cefaleia súbita e explosiva, a pior da sua vida. Sem déficit neurológico ao exame.
+Sintomas: Cefaleia súbita intensa; Fotofobia
+Temperatura (°C): 37.1
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 85
+Frequência Respiratória (ipm): 16
+Pressão Sistólica (mmHg): 130
+Pressão Diastólica (mmHg): 85
+Escala de Dor: 10
+Glicemia Capilar (mg/dL): 98
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+Trecho 2:
+
+
+Quadro 1- Escala de Coma de Glasgow (ECG)
+VARIÁVEIS ESCORE
+ABERTURA OCULAR
+Espontânea 4
+Ordem Verbal 3
+Estímulo doloroso 2
+Nenhum 1
+RESPOSTA VERBAL
+Orientado 5
+Confuso 4
+Palavras inapropriadas 3
+Palavras incompreensíveis 2
+Nenhuma 1
+RESPOSTA MOTORA
+Obedece comandos 6
+Localiza a dor 5
+Movimento de retirada 4
+Flexão anormal 3
+Extensão anormal 2
+Nenhuma 1
+
+Pontuação Máxima: 15
+Pontuação Mínima: 03
+Quadro Neurológico grave: de 03 a 08
+Quadro Neurológico moderado: 09 a 13
+Quadro Neurológico aceitável: 14 a 15
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+38,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 28
+Sexo: Feminino
+Fluxogama: Queixas urinárias
+Anamnese: Paciente gestante de 28 semanas com febre, calafrios e dor lombar. Suspeita de pielonefrite.
+Sintomas: Febre; Calafrios; Dor lombar
+Temperatura (°C): 39.0
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 110
+Frequência Respiratória (ipm): 24
+Pressão Sistólica (mmHg): 125
+Pressão Diastólica (mmHg): 75
+Escala de Dor: 7
+Glicemia Capilar (mg/dL): 102
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: QUEIXAS URINÁRIAS 10-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+AMARELO
+SINAIS VITAIS NORMAIS
+DISÚRIA INTENSA COM POLACIÚRIA E/OU HEMATÚRIA
+DISÚRIA COM PRESENÇA DE SECREÇÃO URETRAL E DOR SUPRAPÚBICA
+DOR, EDEMA E HIPEREMIA DE ESCROTO
+PRESENÇA DE PRIAPRISMO EM PORTADORES DE FALCEMIA
+INTERVENÇÕES CIRÚRGICAS RECENTES EM PRÓSTATA
+PROSTRAÇÃO E/OU FEBRE T > 38º C
+RETENÇÃO URINÁRIA AGUDA COM BEXIGOMA
+VERDE
+DISÚRIA COM OU SEM RELATO DE FEBRE
+DIFICULDADE DE INICIAR A MICÇÃO COM DISÚRIA
+TRAUMA SUPERFICIAL EM GENITÁLIA EXTERNA
+SVD OBSTRUÍDA E/OU ASSOCIADA A QUEIXA DE DOR PÉLVICA/ABDOMINAL
+AZUL
+TROCA DE SONDA VESICAL DE DEMORA (ROTINA)
+
+
+Trecho 2:
+
+
+DESCRITOR: ALTERAÇÕES DA TEMPERATURA 05-B
+VERMELHO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) EM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CIANOSE DE EXTREMIDADES
+EM CRISE CONVULSIVA
+PACIENTE TORPOROSO
+PACIENTES IMUNOCOMPROMETIDOS (ONCOLÓGICOS EM RADIOTERAPIA E QUIMIOTERAPIA, TRANSPLANTADOS, DIABÉTICOS, RENAIS CRÔNICOS, HEPATOPATAS, CARDIOPATAS, EM USO DE CORTICÓIDE)
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+AMARELO
+SINAIS VITAIS (FC, FR, SPO2, T, PA) ALTERADOS SEM NÍVEIS CRÍTICOS (verficar Anexo-6)
+CRIANÇA HIPOATIVA
+HISTÓRIA DE CRISE CONVULSIVA
+MENORES DE 02 ANOS
+PACIENTES IMUNOCOMPETENTES
+CRIANÇA COM SINAIS DE TOXEMIA (SONOLÊNCIA, DORES GENERALIZADAS, DIFICULDADE DE DEAMBULAR)
+PORTADORES DE PATOLOGIA CRÔNICA SEM IMUNO DEFICIÊNCIA
+EVACUAÇÕES SEMILÍQUIDAS (EM MENORES DE 01ANO)
+TEMPERATURA < 39ºC OU ≥ 38ºC APÓS SER MEDICADO HÁ MAIS DE 2h E MENOS DE 4h
+VERDE
+SINAIS VITAIS (FC, FR, SPO2, T, PA) NORMAIS (verficar Anexo-6)
+CRIANÇA ATIVA
+VACINAÇÃO RECENTE
+TEMPERATURA ≤ 37,5ºC
+AZUL
+HISTÓRIA DE FEBRE QUE JÁ MELHOROU HÁ 24H E SEM NENHUM SINAL DOS QUADROS ANTERIORES
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+40,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 25
+Sexo: Feminino
+Fluxogama: Situações de crises psíquicas/abstinência de álcool e outras drogas
+Anamnese: Paciente em crise de ansiedade, choro inconsolável. Sem ideação suicida ou agressividade. Sinais vitais normais.
+Sintomas: Ansiedade; Taquipneia; Tremores
+Temperatura (°C): 36.5
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 90
+Frequência Respiratória (ipm): 20
+Pressão Sistólica (mmHg): 118
+Pressão Diastólica (mmHg): 76
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 96
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+SITUAÇÕES DE CRISES PSÍQUICAS / ABSTINÊNCIA DE
+DESCRITOR:
+ÁLCOOL E OUTRAS DROGAS 23-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+AGITAÇÃO PSICOMOTORA EXTREMA
+DÉFICIT NEUROLÓGICO AGUDO (CONVULSÃO, LETARGIA, COMA)
+GRAVE ALTERAÇÃO DE COMPORTAMENTO
+HIPERTONICIDADE E RIGIDEZ MUSCULAR
+INTOXICAÇÃO POR ABUSO DE SUBSTÂNCIAS PSICOATIVAS
+QUADRO DEPRESSIVO GRAVE / RISCO DE SUICÍDIO
+QUADROS DE SÍNDROMES DE ABSTINÊNCIA DO USO DE SUBSTÂNCIAS PSICOATIVAS
+RISCO IMEDIATO PARA SI OU OUTREM/ AUTO E/OU HETEROAGRESSIVIDADE
+AMARELO
+AGITAÇÃO PSICOMOTORA DE MENOR INTENSIDADE ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+ALUCINAÇÃO, DESORIENTAÇÃO ASSOCIADO A PELO MENOS 1 ALTERAÇÃO DE SSVV
+ESTADO DE PÂNICO
+IDEIA SUICIDA
+VERDE
+SINAIS VITAIS NORMAIS
+ANSIEDADE MODERADA
+HISTÓRIA DE TRANSTORNO MENTAL
+HUMOR DEPRIMIDO
+INQUIETAÇÃO, MAS NÃO AGITADO
+SEM MANIFESTAÇÃO APARENTE DE RISCO PARA SI OU OUTREM
+AZUL
+SINAIS VITAIS NORMAIS
+ANSIEDADE LEVE
+CRISE OU PROBLEMAS SOCIAIS
+DEPRESSÃO CRÔNICA OU RECORRENTE
+HISTÓRICO DE DISTÚRBIO PSIQUIÁTRICO PRECISANDO DE RECEITA MÉDICA
+INSÔNIA OU IMPULSIVIDADE
+
+
+Trecho 2:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+41,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 40
+Sexo: Masculino
+Fluxogama: Hipertensão arterial
+Anamnese: Paciente assintomático, veio apenas para aferição de PA. Histórico de hipertensão, medicação em dia.
+Sintomas: Assintomático
+Temperatura (°C): 36.6
+Oximetria (%): 99
+Frequência Cardíaca (bpm): 72
+Frequência Respiratória (ipm): 16
+Pressão Sistólica (mmHg): 150
+Pressão Diastólica (mmHg): 95
+Escala de Dor: 0
+Glicemia Capilar (mg/dL): 101
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+
+PRESSÃO ARTERIAL
+SISTÓLICA DIASTÓLICA
+NORMOTENSO ≥ 110 ou ≤ 139 mmHg ≥ 60 ou ≤ 89 mmHg
+HIPERTENSO ≥ 140 mmHg ≥ 90 mmHg
+HIPOTENSO ≤ 100 mmHg ≤ 60 mmHg
+
+
+Trecho 2:
+
+
+DESCRITOR: ALTERAÇÕES GLICÊMICAS 16-A
+VERMELHO
+SINAIS VITAIS ALTERADOS COM SINTOMAS:
+FC ≤50 ou ≥120 bpm
+PAS ≤90 ou ≥ 220 / PAD ≤80 ou ≥130 mmHg
+TEMP AXILAR ≤35 ou ≥40º C
+FR ≤10 ou ≥25 ipm
+SPO2 ≤92%
+GLICEMIA CAPILAR < 50 (LO) OU > 500 mg/dL (HI)
+ALTERAÇÃO DO NÍVEL DE CONSCIÊNCIA (LETARGIA, AGITAÇÃO, CONFUSÃO, COMA)
+DISPNÉIA (RÁPIDA E PROFUNDA)
+SUDORESE PROFUSA ASSOCIADA A PELO MENOS 1 ALTERAÇÃO DE SSVV
+AMARELO
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 320 ou < 50 mg/dL
+SINAIS DE DESIDRATAÇÃO LEVE/MODERADA
+SPO2 ENTRE 93 e 95%
+VERDE
+SINAIS VITAIS NORMAIS
+GLICEMIA CAPILAR > 250 mg/dL ASSINTOMÁTICO
+AZUL
+GLICEMIA CAPILAR < 250 mg/dl ASSINTOMÁTICO
+HISTÓRIA DE DIABETES PRECISANDO DE RECEITA MÉDICA E/OU SOLICITAÇÃO DE EXAMES
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
+42,"Você é um sistema inteligente de apoio a decisão clínica. Sua tarefa é classificar pacientes segundo o Protocolo de Triagem de Manchester (MTS), com base nas informações fornecidas sobre a queixa principal, sintomas, sinais vitais e possivelmente uma anamnese. O MTS organiza os pacientes em categorias de prioridade com base em critérios clínicos padronizados, e cada categoria define um tempo máximo recomendado para atendimento. A seguir estão os dados do paciente, identifique a categoria mais apropriada (ex: Vermelho, Laranja, Amarelo, Verde ou Azul) e justifique a escolha com base nos critérios do MTS.
+Aqui estão as informações do paciente: 
+Idade: 70
+Sexo: Feminino
+Fluxogama: Edema/Icterícia/Fraqueza/Câimbra
+Anamnese: Paciente idosa com queixa de fraqueza generalizada há 2 semanas. Exame físico sem alterações agudas.
+Sintomas: Fraqueza; Astenia
+Temperatura (°C): 36.8
+Oximetria (%): 98
+Frequência Cardíaca (bpm): 78
+Frequência Respiratória (ipm): 17
+Pressão Sistólica (mmHg): 142
+Pressão Diastólica (mmHg): 88
+Escala de Dor: 1
+Glicemia Capilar (mg/dL): 108
+Escala de Glasgow: 15
+
+Considere os seguintes trechos do protocolo de triagem como subsídio para sua decisão:
+Trecho 1:
+
+
+DESCRITOR: CRIANÇAS MENORES DE 02 MESES 15-B
+
+VERMELHO
+APNEIA
+CIANOSE CENTRAL
+CONVULSÕES/ MOVIMENTOS ANORMAIS
+TEMPERATURA ≥ 39ºC E OUTROS CRITÉRIOS
+ENCHIMENTO CAPILAR LENTO (> 2 SEG)
+FREQUÊNCIA RESPIRATÓRIA > 60 OU < 30 ipm
+GEMIDO, ESTRIDOR OU SIBILÂNCIA
+LETARGIA/ INCONSCIÊNCIA OU FLACIDEZ
+MANIFESTAÇÕES DE SANGRAMENTO: EQUIMOSES, PETÉQUIAS E/OU HEMORRAGIAS
+TIRAGEM SUBCOSTAL GRAVE
+DEPRESSÃO DE FONTANELA BREGMÁTICA
+FONTANELA BREGMÁTICA TENSA OU ELEVADA
+RIGIDEZ DE NUCA
+
+AMARELO
+UM DOS SEGUINTES SINAIS:
+“NÃO VAI BEM”, IRRITADA
+BATIMENTOS DE ASAS DO NARIZ
+DIARREIA COM SANGUE
+DIARREIA HÁ MAIS DE SETE DIAS
+DISTENSÃO ABDOMINAL
+ICTERÍCIA ABAIXO DO UMBIGO E/OU DE APARECIMENTO ANTES DE 24 HORAS DE VIDA
+NÃO CONSEGUE MAMAR OU BEBER NADA
+PALIDEZ PALMAR INTENSA
+PÚSTULAS OU VESÍCULAS NA PELE (MUITAS OU EXTENSAS)
+SECREÇÃO PURULENTA NO OUVIDO OU NOS OLHOS (ABUNDANTE E COM EDEMA PALPEBRAL) OU NO UMBIGO (COM ERITEMA QUE SE ESTENDE PARA A PELE AO REDOR)
+TEM OLHOS FUNDOS
+TEMPERATURA AXILAR < 36° OU ≥ 37,5°C
+VOMITA TUDO QUE INGERE
+
+VERDE
+CRIANÇA COM FEZES HIPOCÓLICAS OU ACÓLICAS
+CRIANÇA COM ICTERÍCIA DEPOIS DE 01 MÊS DE IDADE
+DIARREIA HÁ MENOS DE SETE DIAS
+DIARREIA SEM SANGUE
+NENHUM DOS SINAIS ANTERIORES, PORÉM COM ALGUMA QUEIXA
+PERDA DE PESO NA PRIMEIRA SEMANA DE VIDA MAIOR QUE 10%
+PLACAS BRANCAS NA BOCA
+PÚSTULAS NA PELE (POUCAS OU LOCALIZADAS)
+SECREÇÃO PURULENTA NOS OLHOS
+UMBIGO COM SECREÇÃO PURULENTA E/OU ERITEMA SEM ESTENDER-SE PARA A PELE AO REDOR
+
+AZUL
+GENITORA SEM QUEIXAS: POR EXEMPLO: LEVOU A CRIANÇA PARA VACINAR, LEVOU PARA À CONSULTA DA PRIMEIRA SEMANA DE VIDA
+NENHUM DOS SINAIS ACIMA
+
+
+Trecho 2:
+
+
+PULSO/ FREQUÊNCIA CARDÍACA
+NORMAL De 60 a 80 Bpm
+TAQUICARDIA ≥ de 100 bpm
+BRADICARDIA ≤ de 60 bpm.
+
+
+
+Com base nessas informacoes, qual e a cor de atendimento do paciente?
+Nao utilize emojis ou outros caracteres na resposta e escreva a explicacao em texto corrido.
+Responda **apenas** com JSON puro, sem markdown, sem texto antes ou depois. Exemplo de saída esperada: {""resposta"":""..."", ""explicacao"":""...""}
+Responda no formato json, com as chaves ""resposta"" e ""explicacao""."
